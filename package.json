@@ -4,7 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@openzeppelin/contracts": "^2.5.0",
     "@truffle/hdwallet-provider": "1.0.28",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-source-maps": "^0.0.3",
@@ -35,5 +34,9 @@
   "engines": {
     "npm": "6.13.4",
     "node": "10.19.0"
+  },
+  "devDependencies": {
+    "@openzeppelin/cli": "^2.7.2",
+    "@openzeppelin/contracts": "^2.5.0"
   }
 }

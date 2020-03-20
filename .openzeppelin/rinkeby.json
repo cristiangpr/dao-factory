@@ -1,0 +1,59 @@
+{
+  "contracts": {
+    "EntityFactory": {
+      "address": "0xD9863B6fF4F0becE2c65567d92C36435894910f6",
+      "constructorCode": "608060405234801561001057600080fd5b50612186806100206000396000f3fe",
+      "bodyBytecodeHash": "60cd11c7312f8d97a6ae833b3ccd10ee1965e081921457b64322d48b59e5b63e",
+      "localBytecodeHash": "90130fa094bdaed625572ebad4985e7426b514d6cabc94bf8794a15dc43e0837",
+      "deployedBytecodeHash": "90130fa094bdaed625572ebad4985e7426b514d6cabc94bf8794a15dc43e0837",
+      "types": {
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
+        "t_array:dyn<t_address>": {
+          "id": "t_array:dyn<t_address>",
+          "valueType": "t_address",
+          "length": "dyn",
+          "kind": "array",
+          "label": "address[]"
+        }
+      },
+      "storage": [
+        {
+          "contract": "EntityFactory",
+          "path": "contracts/Entity.sol",
+          "label": "deployedEntities",
+          "astId": 5,
+          "type": "t_array:dyn<t_address>",
+          "src": "125:33:0"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {
+    "cc.io/EntityFactory": [
+      {
+        "address": "0xC3c4F8615eD7bDdFe51175785117a94BFfb5D624",
+        "version": "1.0.0",
+        "implementation": "0xD9863B6fF4F0becE2c65567d92C36435894910f6",
+        "admin": "0x970BEc069477f8B9Eb197779662b0DF77E05Fed8",
+        "kind": "Upgradeable"
+      }
+    ]
+  },
+  "manifestVersion": "2.2",
+  "version": "1.0.0",
+  "proxyAdmin": {
+    "address": "0x970BEc069477f8B9Eb197779662b0DF77E05Fed8"
+  }
+}

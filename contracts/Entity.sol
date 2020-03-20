@@ -1,18 +1,20 @@
 pragma solidity ^0.5.0;
+import "node_modules/@openzeppelin/contracts/ownership/Ownable.sol";
 
 
-contract EntityFactory {
+contract EntityFactory  {
     address[] public deployedEntities;
 
     function createEntity(uint minimum, string memory name, string memory mission) public {
         address newEntity = address(new Entity(minimum, name, mission, msg.sender));
         deployedEntities.push(address(newEntity));
+      
     }
     function getDeployedEntities() public view returns(address[] memory) {
         return deployedEntities;
     }
 }
-contract Entity {
+contract Entity is Ownable {
 
     struct Request{
         string description;
@@ -31,15 +33,16 @@ contract Entity {
     string public entityName;
     string public missionDescription;
 
-    modifier restricted() {
-        require(msg.sender == manager);
-        _;    }
+
 
      constructor(uint minimum, string memory name, string memory mission, address creator) public {
         manager = creator;
         minimumContribution = minimum;
         entityName = name;
         missionDescription = mission;
+         transferOwnership(manager);
+    
+
 
     }
     function () external payable {}
@@ -51,7 +54,7 @@ contract Entity {
         collaboratorsCount ++;
     }
 
-    function createRequest(string memory  description, uint value, address payable recipient) public restricted {
+    function createRequest(string memory  description, uint value, address payable recipient) public onlyOwner {
          Request memory newRequest = Request ({
              description: description,
              value: value,
@@ -71,7 +74,7 @@ contract Entity {
         requests[index].approvals[msg.sender] = true;
        request.approvalCount ++;
     }
-    function finalizeRequest(uint index) public restricted {
+    function finalizeRequest(uint index) public onlyOwner {
         Request storage request = requests[index];
         require(request.approvalCount > (collaboratorsCount / 2));
         require(!request.complete);
