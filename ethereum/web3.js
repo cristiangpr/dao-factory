@@ -13,7 +13,10 @@ if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
   web3 = new Web3(provider);
 }
 const getProvider = async () => {
-    await window.web3.currentProvider.enable(); // request authentication
+   try { await window.web3.currentProvider.enable(); // request authentication
+   } catch (error) {
+     console.error(error)
+   };
   };
 
 getProvider();
