@@ -1,11 +1,11 @@
 {
   "contracts": {
     "EntityFactory": {
-      "address": "0xD9863B6fF4F0becE2c65567d92C36435894910f6",
-      "constructorCode": "608060405234801561001057600080fd5b50612186806100206000396000f3fe",
-      "bodyBytecodeHash": "60cd11c7312f8d97a6ae833b3ccd10ee1965e081921457b64322d48b59e5b63e",
-      "localBytecodeHash": "90130fa094bdaed625572ebad4985e7426b514d6cabc94bf8794a15dc43e0837",
-      "deployedBytecodeHash": "90130fa094bdaed625572ebad4985e7426b514d6cabc94bf8794a15dc43e0837",
+      "address": "0xd6dD185f8f096F20C5F809dcA837fD09801b3393",
+      "constructorCode": "608060405234801561001057600080fd5b506149b4806100206000396000f3fe",
+      "bodyBytecodeHash": "c2e25f7a58d41c40cd15ff941033fbfaddbda3abad26a9f91e18853aaa4444b2",
+      "localBytecodeHash": "b415a1fe086b214cc066effe87c0906c0bab3c95d23fd1199ba0bd02b4ff39ed",
+      "deployedBytecodeHash": "b415a1fe086b214cc066effe87c0906c0bab3c95d23fd1199ba0bd02b4ff39ed",
       "types": {
         "t_address": {
           "id": "t_address",
@@ -25,9 +25,9 @@
           "contract": "EntityFactory",
           "path": "contracts/Entity.sol",
           "label": "deployedEntities",
-          "astId": 5,
+          "astId": 8,
           "type": "t_array:dyn<t_address>",
-          "src": "125:33:0"
+          "src": "348:33:0"
         }
       ],
       "warnings": {
@@ -35,25 +35,14 @@
         "hasSelfDestruct": false,
         "hasDelegateCall": false,
         "hasInitialValuesInDeclarations": false,
-        "uninitializedBaseContracts": []
+        "uninitializedBaseContracts": [],
+        "storageUncheckedVars": [],
+        "storageDiff": []
       }
     }
   },
   "solidityLibs": {},
-  "proxies": {
-    "cc.io/EntityFactory": [
-      {
-        "address": "0xC3c4F8615eD7bDdFe51175785117a94BFfb5D624",
-        "version": "1.0.0",
-        "implementation": "0xD9863B6fF4F0becE2c65567d92C36435894910f6",
-        "admin": "0x970BEc069477f8B9Eb197779662b0DF77E05Fed8",
-        "kind": "Upgradeable"
-      }
-    ]
-  },
+  "proxies": {},
   "manifestVersion": "2.2",
-  "version": "1.0.0",
-  "proxyAdmin": {
-    "address": "0x970BEc069477f8B9Eb197779662b0DF77E05Fed8"
-  }
+  "version": "1.0.0"
 }

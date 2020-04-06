@@ -1,5 +1,8 @@
 pragma solidity ^0.5.0;
 import "node_modules/@openzeppelin/contracts/ownership/Ownable.sol";
+import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
+import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol";
 
 
 contract EntityFactory  {
@@ -32,6 +35,9 @@ contract Entity is Ownable {
     uint public collaboratorsCount;
     string public entityName;
     string public missionDescription;
+  
+
+
 
 
 
@@ -98,4 +104,33 @@ contract Entity is Ownable {
     function getRequestsCount() public view returns (uint) {
         return requests.length;
     }
+
+address[] public deployedTokens;
+
+    function createToken(uint256 initialSupply, string memory name, string memory symbol) public onlyOwner {
+        address newToken = address(new Token(initialSupply, name, symbol, msg.sender));
+        deployedTokens.push(address(newToken));
+    
+      
+    }
+    function getDeployedTokens() public view returns(address[] memory) {
+        return deployedTokens;
+    }
+
 }
+
+
+
+contract Token is ERC20, ERC20Detailed, ERC20Mintable {
+ 
+
+
+    
+     constructor(uint256 initialSupply, string memory name, string memory symbol, address minter) ERC20Detailed(name, symbol, 18) public {
+ 
+        mint(minter, initialSupply);
+        addMinter(minter);
+       
+    }
+}
+

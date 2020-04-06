@@ -1,6 +1,7 @@
 {
   "manifestVersion": "2.2",
   "contracts": {
+    "Entity": "Entity",
     "EntityFactory": "EntityFactory"
   },
   "dependencies": {},
@@ -20,6 +21,5 @@
     "solcVersion": "0.5.17",
     "artifactsDir": "build/contracts",
     "contractsDir": "contracts"
-  },
-  "telemetryOptIn": true
+  }
 }

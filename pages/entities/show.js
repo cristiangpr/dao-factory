@@ -107,6 +107,16 @@ class EntityShow extends Component {
                <Button primary>View Requests</Button>
              </a>
            </Link>
+           <Link route={`/entities/${this.props.address}/token/new`}>
+             <a>
+               <Button primary>Create Tokens</Button>
+             </a>
+           </Link>
+           <Link route={`/entities/${this.props.address}/token`}>
+             <a>
+               <Button primary>View Tokens</Button>
+             </a>
+           </Link>
          </Grid.Column>
        </Grid.Row>
 
