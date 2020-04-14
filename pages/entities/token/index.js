@@ -26,7 +26,7 @@ class TokenIndex extends Component {
         style:{background:'rgba(247, 138, 42, 1)'},
         header: address,
         description: (
-          <Link route={`/tokens/${address}`}>
+          <Link route={`/entities/${this.props.address}/token/${address}/show`}>
           <a>View Token</a>
           </Link>
         ),
@@ -43,7 +43,7 @@ render(){
   <div>
 
   <h3>Open Tokens</h3>
-<Link route='/token/new'>
+<Link route={`/entities/${this.props.address}/token/new`}>
 <a>
   <Button
   content="Create Token"

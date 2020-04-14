@@ -71,7 +71,7 @@ onSubmit = async event => {
             />
           </Form.Field>
           <Form.Field>
-           <label>Token Mission</label>
+           <label>Token Symbol</label>
            <Input
              value={this.state.tokenSymbol}
              onChange={e => this.setState({tokenSymbol: e.target.value}) }
