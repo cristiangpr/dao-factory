@@ -14,12 +14,12 @@ class EntityIndex extends Component {
 
   }
   renderEntities() {
-    const items = this.props.entities.map(address => {
+    const items = this.props.entities.map(entityAddress => {
       return {
         style:{background:'rgba(247, 138, 42, 1)'},
-        header: address,
+        header: entityAddress,
         description: (
-          <Link route={`/entities/${address}`}>
+          <Link route={`/entities/${entityAddress}`}>
           <a>View Entity</a>
           </Link>
         ),

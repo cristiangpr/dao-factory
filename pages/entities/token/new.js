@@ -36,8 +36,9 @@ onSubmit = async event => {
 
     try {
        const accounts = await web3.eth.getAccounts();
+      
        await entity.methods
-       .createToken(this.state.initialsupply, this.state.tokenName, this.state.tokenSymbol)
+       .createToken(web3.utils.toWei(this.state.initialsupply, 'ether'), this.state.tokenName, this.state.tokenSymbol)
        .send({
          from: accounts[0]
        });
@@ -59,7 +60,7 @@ onSubmit = async event => {
           <Form.Field>
            <label>Initial Supply</label>
            <Input
-             value={this.state.minimumContribution}
+             value={this.state.initialsupply}
              onChange={e => this.setState({initialsupply: e.target.value}) }
              />
           </Form.Field>

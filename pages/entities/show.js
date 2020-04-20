@@ -11,11 +11,11 @@ import { Link } from '../../routes';
 
 class EntityShow extends Component {
    static async getInitialProps(props){
-     const entity = Entity(props.query.address);
+     const entity = Entity(props.query.entityAddress);
      const summary = await entity.methods.getSummary().call();
      console.log(summary);
      return {
-       address: props.query.address,
+       entityAddress: props.query.entityAddress,
        minimumContribution: summary[0],
        balance: summary[1],
        requestsCount: summary[2],
@@ -34,7 +34,8 @@ class EntityShow extends Component {
        requestsCount,
        approversCount,
        name,
-       mission
+       mission,
+       entityAddress
      } = this.props;
 
      const items = [
@@ -97,22 +98,22 @@ class EntityShow extends Component {
       <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
 
       <Grid.Column width={6}>
-        <ContributeForm address={this.props.address} />
+        <ContributeForm entityAddress={this.props.entityAddress} />
       </Grid.Column>
     </Grid.Row>
     <Grid.Row>
          <Grid.Column>
-           <Link route={`/entities/${this.props.address}/requests`}>
+           <Link route={`/entities/${this.props.entityAddress}/requests`}>
              <a>
                <Button primary>View Requests</Button>
              </a>
            </Link>
-           <Link route={`/entities/${this.props.address}/token/new`}>
+           <Link route={`/entities/${this.props.entityAddress}/token/new`}>
              <a>
                <Button primary>Create Tokens</Button>
              </a>
            </Link>
-           <Link route={`/entities/${this.props.address}/token`}>
+           <Link route={`/entities/${this.props.entityAddress}/token`}>
              <a>
                <Button primary>View Tokens</Button>
              </a>

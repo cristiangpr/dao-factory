@@ -9,8 +9,8 @@ import RequestRow from '../../../components/RequestRow';
 
 class RequestIndex extends Component {
   static async getInitialProps(props) {
-    const { address } = props.query;
-    const entity = Entity(address);
+    const { entityAddress } = props.query;
+    const entity = Entity(entityAddress);
     const requestCount = await entity.methods.getRequestsCount().call();
     const collaboratorsCount = await entity.methods.collaboratorsCount().call();
 
@@ -22,7 +22,7 @@ class RequestIndex extends Component {
         })
     );
 
-    return { address, requests, requestCount, collaboratorsCount };
+    return { entityAddress, requests, requestCount, collaboratorsCount };
   }
 
   renderRows() {
@@ -32,7 +32,7 @@ class RequestIndex extends Component {
             key={index}
             id={index}
             request={request}
-            address={this.props.address}
+            entityAddress={this.props.entityAddress}
             approversCount={this.props.collaboratorsCount}
           />
         );
@@ -45,7 +45,7 @@ class RequestIndex extends Component {
       <Fragment>
       <Layout>
         <h3>Requests</h3>
-        <Link route={`/entities/${this.props.address}/requests/new`}>
+        <Link route={`/entities/${this.props.entityAddress}/requests/new`}>
           <a>
             <Button primary floated="right" style={{ marginBottom: 10 }}>
               Add Request

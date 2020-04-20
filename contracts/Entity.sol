@@ -3,6 +3,7 @@ import "node_modules/@openzeppelin/contracts/ownership/Ownable.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol";
+import "node_modules/@openzeppelin/contracts/crowdsale/Crowdsale.sol";
 
 
 contract EntityFactory  {
@@ -35,11 +36,7 @@ contract Entity is Ownable {
     uint public collaboratorsCount;
     string public entityName;
     string public missionDescription;
-  
-
-
-
-
+   
 
      constructor(uint minimum, string memory name, string memory mission, address creator) public {
         manager = creator;
@@ -104,10 +101,9 @@ contract Entity is Ownable {
     function getRequestsCount() public view returns (uint) {
         return requests.length;
     }
+        address[] public deployedTokens;
 
-address[] public deployedTokens;
-
-    function createToken(uint256 initialSupply, string memory name, string memory symbol) public onlyOwner {
+    function createToken(uint initialSupply, string memory name, string memory symbol) public onlyOwner {
         address newToken = address(new Token(initialSupply, name, symbol, msg.sender));
         deployedTokens.push(address(newToken));
     
@@ -116,10 +112,30 @@ address[] public deployedTokens;
     function getDeployedTokens() public view returns(address[] memory) {
         return deployedTokens;
     }
+            address[] public deployedCrowdsales;
 
+    function createCrowdsale(uint256 rate, address payable wallet,  IERC20 token) public onlyOwner {
+        address newCrowdsale = address(new SimpleCrowdsale(rate, wallet, token));
+        deployedCrowdsales.push(address(newCrowdsale));
+    
+      
+    }
+    function getDeployedCrowdsales() public view returns(address[] memory) {
+        return deployedCrowdsales;
+    }
 }
 
-
+contract SimpleCrowdsale is Crowdsale {
+    constructor (
+        uint256 rate,
+        address payable wallet,
+        IERC20 token
+    )
+        public
+        Crowdsale(rate, wallet, token)
+    {
+    }
+}
 
 contract Token is ERC20, ERC20Detailed, ERC20Mintable {
  
@@ -133,4 +149,5 @@ contract Token is ERC20, ERC20Detailed, ERC20Mintable {
        
     }
 }
+
 

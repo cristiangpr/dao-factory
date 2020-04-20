@@ -17,15 +17,15 @@ state = {
 };
 
 static async getInitialProps(props) {
-  const { address } = props.query;
+  const { entityAddress } = props.query;
 
-  return { address };
+  return { entityAddress };
 }
 
 onSubmit = async event => {
   event.preventDefault();
 
-  const entity = Entity(this.props.address);
+  const entity = Entity(this.props.entityAddress);
   const { description, value, recipient } = this.state;
 
   this.setState({ loading: true, errorMessage: '' });
@@ -36,7 +36,7 @@ onSubmit = async event => {
       .createRequest(description, web3.utils.toWei(value, 'ether'), recipient)
       .send({ from: accounts[0] });
 
-    Router.pushRoute(`/entities/${this.props.address}/requests`);
+    Router.pushRoute(`/entities/${this.props.entityAddress}/requests`);
   } catch (err) {
     this.setState({ errorMessage: err.message });
   }
@@ -48,7 +48,7 @@ render() {
   return (
     <Fragment>
     <Layout>
-      <Link route={`/entities/${this.props.address}/requests`}>
+      <Link route={`/entities/${this.props.entityAddress}/requests`}>
         <a>Back</a>
       </Link>
       <h3>Create a Request</h3>
