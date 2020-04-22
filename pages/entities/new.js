@@ -6,6 +6,7 @@ import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 import { Link, Router } from '../../routes.js'
 
+
 class EntityNew extends Component {
   state = {
     minimumContribution: '',
@@ -19,14 +20,23 @@ class EntityNew extends Component {
     this.setState({ loading: true, errorMessage: '' });
 
     try {
+      var ethJsUtil = require('ethereumjs-util');
        const accounts = await web3.eth.getAccounts();
+       const contractFactoryAddress = '0xDbdDFC2cb6c2573aA2C6ee41fa05c7f42e5Fe8BB';
+       const futureAddress = ethJsUtil.bufferToHex(ethJsUtil.generateAddress(
+        contractFactoryAddress,
+        await web3.eth.getTransactionCount(contractFactoryAddress)));
+        console.log(futureAddress);
+        console.log(contractFactoryAddress);
+      
        await factory.methods
          .createEntity(this.state.minimumContribution, this.state.entityName, this.state.missionDescription)
          .send({
            from: accounts[0]
          });
-
-     Router.pushRoute('/');
+      
+     Router.pushRoute(`/entities/${futureAddress}`);
+    
      } catch (err) {
        this.setState({ errorMessage: err.message });
      }
@@ -38,7 +48,7 @@ class EntityNew extends Component {
        <Fragment>
       <Layout>
 
-        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%', paddingBottom:'160px;', paddingTop:'100px'}}>
+        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%', paddingBottom:'160px', paddingTop:'100px'}}>
           <h1 style={{color:'black'}}>Create new entity</h1>
           <Form.Field>
            <label>Minimum Contribution</label>

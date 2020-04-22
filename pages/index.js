@@ -4,6 +4,7 @@ import { Card, Button, Grid, Container } from 'semantic-ui-react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import Carousel from 'react-bootstrap/Carousel';
+import ethJsUtil from 'ethereumjs-util';
 
 
 import { Link } from '../routes.js'

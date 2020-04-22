@@ -44,8 +44,9 @@ onSubmit = async event => {
        .send({
          from: accounts[0]
        });
-       const crowdsale = await entity.methods.getDeployedCrowdsales([0]).call();
-       await token.methods.transfer(crowdsale, this.state.supply);
+       const crowdsales = await entity.methods.getDeployedCrowdsales().call();
+    
+       await token.methods.transfer(crowdsales[0], this.state.supply);
 
      Router.pushRoute('/');
      } catch (err) {

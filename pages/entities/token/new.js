@@ -19,17 +19,17 @@ class TokenNew extends Component {
   };
 
   static async getInitialProps(props) {
-    const { address } = props.query;
+    const {entityAddress}  = props.query;
    
   
-    return { address };
+    return  {entityAddress};
   }
   
  
 onSubmit = async event => {
   event.preventDefault();
 
-   const entity = Entity(this.props.address);
+   const entity = Entity(this.props.entityAddress);
   
 
   this.setState({ loading: true, errorMessage: '' });

@@ -10,12 +10,13 @@ import { Link, Router } from '../../../../routes.js'
 class CrowdsaleIndex extends Component {
     static async getInitialProps(props) {
         const  entityAddress = props.query.entityAddress;
+        const tokenAddress = props.query.tokenAddress;
         const entity = Entity(entityAddress);
         const crowdsales = await entity.methods.getDeployedCrowdsales().call();
      
     
      
-        return { entityAddress, crowdsales : crowdsales };
+        return { entityAddress, crowdsales : crowdsales, tokenAddress };
       }
 
 
@@ -27,7 +28,7 @@ class CrowdsaleIndex extends Component {
         style:{background:'rgba(247, 138, 42, 1)'},
         header: crowdsale,
         description: (
-          <Link route={`/entities/${this.props.entityAddress}/crowdsale/${crowdsale}/show`}>
+          <Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/crowdsale/${crowdsale}/show`}>
           <a>View Crowdsale</a>
           </Link>
         ),
@@ -44,7 +45,8 @@ render(){
   <div>
 
   <h3>Open Crowdsales</h3>
-<Link route={`/entities/${this.props.entityAddress}/token/crowdsale/new`}>
+ <Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/crowdsale/new`}>
+
 <a>
   <Button
   content="Create Crowdsale"

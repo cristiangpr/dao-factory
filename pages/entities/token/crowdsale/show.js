@@ -1,32 +1,37 @@
 
 import React, { Component, Fragment } from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
-import Layout from '../../../components/Layout';
-import Footer from '../../../components/Footer';
-import Token from '../../../ethereum/token';
-import Entity from '../../../ethereum/entity';
-import ContributeForm from '../../../components/ContributeForm'
-import web3 from '../../../ethereum/web3';
+import Layout from '../../../../components/Layout';
+import Footer from '../../../../components/Footer';
+import Token from '../../../../ethereum/token';
+import Entity from '../../../../ethereum/entity';
+import Crowdsale from '../../../../ethereum/crowdsale';
+import ContributeForm from '../../../../components/ContributeForm'
+import web3 from '../../../../ethereum/web3';
 
-import { Link } from '../../../routes';
+import { Link } from '../../../../routes';
 
-class TokenShow extends Component {
+class CrowdsaleShow extends Component {
    static async getInitialProps(props){
      const token = await Token(props.query.tokenAddress);
+     const crowdsale = await Crowdsale(props.query.crowdsaleAddress);
      const name = await token.methods.name().call();
      const symbol = await token.methods.symbol().call();
      const totalSupply = await token.methods.totalSupply().call();
      const convertedSupply = await web3.utils.fromWei(totalSupply, 'ether');
-     const balance = await token.methods.balanceOf(props.query.entityAddress).call();
+     const balance = await token.methods.balanceOf(props.query.crowdsaleAddress).call();
+     const convertedBalance = await web3.utils.fromWei(balance, 'ether');
 
     
      return {
        tokenAddress: props.query.tokenAddress,
+       crowdsaleAddress: props.query.crowdsaleAddress,
        name: name,
        symbol: symbol,
        entityAddress: props.query.entityAddress,
        balance: balance,
-       convertedSupply : convertedSupply
+       convertedSupply : convertedSupply,
+       convertedBalance : convertedBalance
      
 
      };
@@ -38,7 +43,8 @@ class TokenShow extends Component {
        symbol,
        convertedSupply,
        entityAddress,
-       balance
+       balance,
+       convertedBalance
      } = this.props;
 
      const items = [
@@ -81,7 +87,7 @@ class TokenShow extends Component {
       {
 
         header: "Available for Sale",
-        meta: balance,
+        meta: convertedBalance,
      
         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
       },
@@ -139,4 +145,4 @@ class TokenShow extends Component {
   }
 }
 
-export default TokenShow;
+export default CrowdsaleShow;
