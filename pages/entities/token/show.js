@@ -5,7 +5,7 @@ import Layout from '../../../components/Layout';
 import Footer from '../../../components/Footer';
 import Token from '../../../ethereum/token';
 import Entity from '../../../ethereum/entity';
-import ContributeForm from '../../../components/ContributeForm'
+import CreateCrowdsaleForm from '../../../components/CreateCrowdsaleForm'
 import web3 from '../../../ethereum/web3';
 
 import { Link } from '../../../routes';
@@ -18,6 +18,10 @@ class TokenShow extends Component {
      const totalSupply = await token.methods.totalSupply().call();
      const convertedSupply = await web3.utils.fromWei(totalSupply, 'ether');
      const balance = await token.methods.balanceOf(props.query.entityAddress).call();
+     const convertedBalance = await web3.utils.fromWei(balance, 'ether');
+     const accounts = await web3.eth.getAccounts();
+     const myBalance = await token.methods.balanceOf(accounts[0]).call();
+     const convertedMyBalance = await web3.utils.fromWei(myBalance, 'ether');
 
     
      return {
@@ -25,8 +29,10 @@ class TokenShow extends Component {
        name: name,
        symbol: symbol,
        entityAddress: props.query.entityAddress,
-       balance: balance,
-       convertedSupply : convertedSupply
+       convertedBalance: convertedBalance,
+       convertedSupply : convertedSupply,
+       convertedMyBalance : convertedMyBalance,
+      
      
 
      };
@@ -38,7 +44,8 @@ class TokenShow extends Component {
        symbol,
        convertedSupply,
        entityAddress,
-       balance
+       convertedBalance,
+       convertedMyBalance
      } = this.props;
 
      const items = [
@@ -81,7 +88,13 @@ class TokenShow extends Component {
       {
 
         header: "Available for Sale",
-        meta: balance,
+        meta: convertedBalance,
+     
+        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+      },
+      {
+        header: "My Balance",
+        meta: convertedMyBalance,
      
         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
       },
@@ -101,28 +114,12 @@ class TokenShow extends Component {
       <Grid.Column width={6}>{this.renderCards()}</Grid.Column>
 
       <Grid.Column width={10}>
-        <ContributeForm address={this.props.address} />
+        <CreateCrowdsaleForm entityAddress={this.props.entityAddress} tokenAddress={this.props.tokenAddress}/>
 
-        <Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/crowdsale/new`}>
-<a>
-  <Button
-  content="Create Crowdsale"
-  icon="add circle"
-  primary
-  
-  />
-  </a>
-</Link>
-<Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/crowdsale`}>
-<a>
-  <Button
-  content="View Crowdsale"
-  
-  primary
-  
-  />
-  </a>
-</Link>
+      
+
+      
+
       </Grid.Column>
       
     </Grid.Row>

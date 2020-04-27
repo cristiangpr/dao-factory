@@ -28,7 +28,7 @@ class CrowdsaleIndex extends Component {
         style:{background:'rgba(247, 138, 42, 1)'},
         header: crowdsale,
         description: (
-          <Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/crowdsale/${crowdsale}/show`}>
+          <Link route={`/entities/${this.props.entityAddress}/token/crowdsale/${crowdsale}/show`}>
           <a>View Crowdsale</a>
           </Link>
         ),

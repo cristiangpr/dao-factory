@@ -35,7 +35,14 @@ onSubmit = async event => {
   this.setState({ loading: true, errorMessage: '' });
 
     try {
-       const accounts = await web3.eth.getAccounts();
+      var ethJsUtil = require('ethereumjs-util');
+      const accounts = await web3.eth.getAccounts();
+      const entityAddress = this.props.entityAddress;
+      const futureAddress = ethJsUtil.bufferToHex(ethJsUtil.generateAddress(
+       entityAddress,
+       await web3.eth.getTransactionCount(entityAddress)));
+       console.log(futureAddress);
+    
       
        await entity.methods
        .createToken(web3.utils.toWei(this.state.initialsupply, 'ether'), this.state.tokenName, this.state.tokenSymbol)
@@ -43,7 +50,7 @@ onSubmit = async event => {
          from: accounts[0]
        });
 
-     Router.pushRoute('/');
+     Router.pushRoute(`/entities/${entityAddress}/token/${futureAddress}/show`);
      } catch (err) {
        this.setState({ errorMessage: err.message });
      }

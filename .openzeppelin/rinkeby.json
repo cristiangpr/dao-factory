@@ -1,7 +1,7 @@
 {
   "contracts": {
     "EntityFactory": {
-      "address": "0x9E555E98E0C046989B5b3D5dDb1808828046A82a",
+      "address": "0xa7a2606a46383f3d57876961570E48435593ec5D",
       "constructorCode": "608060405234801561001057600080fd5b50615b3a806100206000396000f3fe",
       "bodyBytecodeHash": "7e2357d66457d132f2ef7273b1af9ec1854baae3a7b2f451fa7d799bcb8d48c1",
       "localBytecodeHash": "6b5cd62feefbcb0f5be5725e7a12f943f2970f979b43475ceb82dff799634210",
@@ -43,10 +43,10 @@
   "proxies": {
     "cc.io/EntityFactory": [
       {
-        "address": "0xDbdDFC2cb6c2573aA2C6ee41fa05c7f42e5Fe8BB",
+        "address": "0x8C219aD5bF72B03c4837aCD21Aa0E5a2992adF69",
         "version": "1.0.0",
-        "implementation": "0x9E555E98E0C046989B5b3D5dDb1808828046A82a",
-        "admin": "0xE2B275e6D34B6728a5Cbdede6a867076eE426835",
+        "implementation": "0xa7a2606a46383f3d57876961570E48435593ec5D",
+        "admin": "0x6bAE5e3136Ec604C15f9b24B0B691eFb061c1990",
         "kind": "Upgradeable"
       }
     ]
@@ -54,6 +54,6 @@
   "manifestVersion": "2.2",
   "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0xE2B275e6D34B6728a5Cbdede6a867076eE426835"
+    "address": "0x6bAE5e3136Ec604C15f9b24B0B691eFb061c1990"
   }
 }

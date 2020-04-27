@@ -6,32 +6,38 @@ import Footer from '../../../../components/Footer';
 import Token from '../../../../ethereum/token';
 import Entity from '../../../../ethereum/entity';
 import Crowdsale from '../../../../ethereum/crowdsale';
-import ContributeForm from '../../../../components/ContributeForm'
+import CrowdsaleForm from '../../../../components/CrowdsaleForm'
 import web3 from '../../../../ethereum/web3';
 
 import { Link } from '../../../../routes';
 
 class CrowdsaleShow extends Component {
    static async getInitialProps(props){
-     const token = await Token(props.query.tokenAddress);
+     
      const crowdsale = await Crowdsale(props.query.crowdsaleAddress);
+     const tokenAddress = await crowdsale.methods.token().call();
+     const token = await Token(tokenAddress);
      const name = await token.methods.name().call();
      const symbol = await token.methods.symbol().call();
      const totalSupply = await token.methods.totalSupply().call();
      const convertedSupply = await web3.utils.fromWei(totalSupply, 'ether');
      const balance = await token.methods.balanceOf(props.query.crowdsaleAddress).call();
      const convertedBalance = await web3.utils.fromWei(balance, 'ether');
-
+     const accounts = await web3.eth.getAccounts();
+     const myBalance = await token.methods.balanceOf(accounts[0]).call();
+     const convertedMyBalance = await web3.utils.fromWei(myBalance, 'ether');
     
      return {
-       tokenAddress: props.query.tokenAddress,
+       tokenAddress: tokenAddress,
        crowdsaleAddress: props.query.crowdsaleAddress,
        name: name,
        symbol: symbol,
        entityAddress: props.query.entityAddress,
        balance: balance,
        convertedSupply : convertedSupply,
-       convertedBalance : convertedBalance
+       convertedBalance : convertedBalance,
+       convertedMyBalance : convertedMyBalance,
+       crowdsale : crowdsale
      
 
      };
@@ -44,14 +50,15 @@ class CrowdsaleShow extends Component {
        convertedSupply,
        entityAddress,
        balance,
-       convertedBalance
+       convertedBalance,
+       convertedMyBalance
      } = this.props;
 
      const items = [
 
       {
 
-        header: "Entity",
+        header: "Entity Address",
         meta: entityAddress,
         
         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
@@ -91,6 +98,12 @@ class CrowdsaleShow extends Component {
      
         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
       },
+      {
+      header: "My Balance",
+      meta: convertedMyBalance,
+   
+      style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+    },
  
      ];
 
@@ -107,28 +120,9 @@ class CrowdsaleShow extends Component {
       <Grid.Column width={6}>{this.renderCards()}</Grid.Column>
 
       <Grid.Column width={10}>
-        <ContributeForm address={this.props.address} />
+        <CrowdsaleForm crowdsaleAddress={this.props.crowdsaleAddress} tokenAddress={this.props.tokenAddress} crowdsaleAddress={this.props.crowdsaleAddress} />
 
-        <Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/crowdsale/new`}>
-<a>
-  <Button
-  content="Create Crowdsale"
-  icon="add circle"
-  primary
-  
-  />
-  </a>
-</Link>
-<Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/crowdsale`}>
-<a>
-  <Button
-  content="View Crowdsale"
-  
-  primary
-  
-  />
-  </a>
-</Link>
+
       </Grid.Column>
       
     </Grid.Row>
