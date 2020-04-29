@@ -5,32 +5,31 @@ import Footer from '../../../../components/Footer';
 import Token from '../../../../ethereum/token';
 import Entity from '../../../../ethereum/entity';
 import SimpleCrowdsale from '../../../../ethereum/simpleCrowdsale';
-import BuyTokensForm from '../../../../components/BuyTokensForm';
-import FundCrowdsaleForm from '../../../../components/FundCrowdsaleForm';
+import FundCrowdsaleForm from '../../../../components/FundCrowdsaleForm'
 import web3 from '../../../../ethereum/web3';
 
 import { Link } from '../../../../routes';
 
-class CrowdsaleShow extends Component {
+class CrowdsaleFund extends Component {
    static async getInitialProps(props){
-     
+    
      const crowdsale = await SimpleCrowdsale(props.query.crowdsaleAddress);
      const rate = await crowdsale.methods.rate().call();
-     const tokenAddress = await crowdsale.methods.token().call();
-     const crowdsaleAddress = props.query.crowdsaleAddress;
+     const tokenAddress = props.query.tokenAddress;
      const token = await Token(tokenAddress);
      const name = await token.methods.name().call();
      const symbol = await token.methods.symbol().call();
      const totalSupply = await token.methods.totalSupply().call();
      const convertedSupply = await web3.utils.fromWei(totalSupply, 'ether');
-     const balance = await token.methods.balanceOf(crowdsaleAddress).call();
+     const balance = await token.methods.balanceOf(props.query.crowdsaleAddress).call();
      const convertedBalance = await web3.utils.fromWei(balance, 'ether');
-  
     
+     
+   
     
      return {
        tokenAddress: tokenAddress,
-       crowdsaleAddress: crowdsaleAddress,
+       crowdsaleAddress: props.query.crowdsaleAddress,
        name: name,
        symbol: symbol,
        entityAddress: props.query.entityAddress,
@@ -101,7 +100,7 @@ class CrowdsaleShow extends Component {
      
         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
       },
- 
+
     {
       header: "Token Price in ETH",
       meta: rate,
@@ -124,9 +123,9 @@ class CrowdsaleShow extends Component {
       <Grid.Column width={6}>{this.renderCards()}</Grid.Column>
 
       <Grid.Column width={10}>
-        <BuyTokensForm entityAddress={this.props.entityAddress} tokenAddress={this.props.tokenAddress} crowdsaleAddress={this.props.crowdsaleAddress} />
-
         <FundCrowdsaleForm entityAddress={this.props.entityAddress} tokenAddress={this.props.tokenAddress} crowdsaleAddress={this.props.crowdsaleAddress} />
+
+
       </Grid.Column>
       
     </Grid.Row>
@@ -143,4 +142,4 @@ class CrowdsaleShow extends Component {
   }
 }
 
-export default CrowdsaleShow;
+export default CrowdsaleFund;

@@ -1,9 +1,9 @@
-
 import React, { Component, Fragment } from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import Footer from '../../components/Footer';
 import Entity from '../../ethereum/entity';
+import SimpleCrowdsale from '../../ethereum/simpleCrowdsale';
 import ContributeForm from '../../components/ContributeForm'
 import web3 from '../../ethereum/web3';
 
@@ -13,9 +13,15 @@ class EntityShow extends Component {
    static async getInitialProps(props){
      const entity = Entity(props.query.entityAddress);
      const summary = await entity.methods.getSummary().call();
+     const tokens = await entity.methods.getDeployedTokens().call();
+     const crowdsales = await entity.methods.getDeployedCrowdsales().call();
+     
      console.log(summary);
      return {
        entityAddress: props.query.entityAddress,
+      
+       tokens : tokens,
+       crowdsales : crowdsales,
        minimumContribution: summary[0],
        balance: summary[1],
        requestsCount: summary[2],
@@ -35,7 +41,8 @@ class EntityShow extends Component {
        approversCount,
        name,
        mission,
-       entityAddress
+       entityAddress,
+       tokens
      } = this.props;
 
      const items = [
@@ -88,6 +95,39 @@ class EntityShow extends Component {
      return <Card.Group items={items} />;
    }
 
+   renderTokens() {
+    const items = this.props.tokens.map(token => {
+      return {
+        style:{background:'rgba(247, 138, 42, 1)'},
+        header: token,
+        description: (
+          <Link route={`/entities/${this.props.entityAddress}/token/${token}/show`}>
+          <a>View Token</a>
+          </Link>
+        ),
+        fluid: true
+      }
+    });
+    return <Card.Group items={items} style={{paddingBottom:'250px'}} />
+  }
+  renderCrowdsales() {
+    const items = this.props.crowdsales.map(crowdsale => {
+      return {
+        style:{background:'#0F93FE'},
+        header: crowdsale,
+        description: (
+          <Link route={`/entities/${this.props.entityAddress}/crowdsale/${crowdsale}/show`}>
+          <a>View Token</a>
+          </Link>
+        ),
+        fluid: true
+      }
+    });
+    return <Card.Group items={items} style={{paddingBottom:'250px'}} />
+  }
+
+
+
   render() {
     return (
       <Fragment>
@@ -95,10 +135,11 @@ class EntityShow extends Component {
         <h3>Entity Show</h3>
         <Grid>
     <Grid.Row>
-      <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
+      <Grid.Column width={10}> <h3 style={{color: 'black'}}>Entity</h3>{this.renderCards()}</Grid.Column>
 
       <Grid.Column width={6}>
-        <ContributeForm entityAddress={this.props.entityAddress} />
+      <h3 style={{color: 'black'}} >Open Token Crowdsales</h3>
+      {this.renderCrowdsales()}
       </Grid.Column>
     </Grid.Row>
     <Grid.Row>

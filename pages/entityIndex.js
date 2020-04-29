@@ -19,7 +19,7 @@ class EntityIndex extends Component {
         style:{background:'rgba(247, 138, 42, 1)'},
         header: entityAddress,
         description: (
-          <Link route={`/entities/${entityAddress}`}>
+          <Link route={`/entities/${entityAddress}/show`}>
           <a>View Entity</a>
           </Link>
         ),

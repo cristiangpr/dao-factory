@@ -1,98 +1,130 @@
 import React, { Component, Fragment } from 'react';
-import { Form, Button, Input, Message, Grid } from 'semantic-ui-react';
+import { Mwssage, Grid, Card } from 'semantic-ui-react';
 import Layout from '../../../../components/Layout';
 import Footer from '../../../../components/Footer';
 import Entity from '../../../../ethereum/entity';
 import Token from '../../../../ethereum/token';
 import web3 from '../../../../ethereum/web3';
-import { Link, Router } from '../../../../routes.js'
+import { Link, Router } from '../../../../routes.js';
+import CreateCrowdsaleForm from '../../../../components/CreateCrowdsaleForm';
 
 class CrowdsaleNew extends Component {
 
 
-  state = {
-  
-    errorMessage: '',
-    loading: false,
-    rate: '',
-    supply: 0,
+  static async getInitialProps(props){
+    const token = await Token(props.query.tokenAddress);
    
-  };
+   
 
-  static async getInitialProps(props) {
-    const entityAddress = props.query.entityAddress;
-    const tokenAddress = props.query.tokenAddress;
+    const name = await token.methods.name().call();
+    const symbol = await token.methods.symbol().call();
+    const totalSupply = await token.methods.totalSupply().call();
+    const convertedSupply = await web3.utils.fromWei(totalSupply, 'ether');
+    
+    
+    
    
-  
-    return { tokenAddress,  entityAddress };
-  }
-  
+
+   
+    return {
+      tokenAddress: props.query.tokenAddress,
+      name: name,
+      symbol: symbol,
+      entityAddress: props.query.entityAddress,
+   
+      convertedSupply : convertedSupply,
  
-onSubmit = async event => {
-  event.preventDefault();
-
-  const entity = Entity(this.props.entityAddress);
-  const token = Token(this.props.tokenAddress);
-  console.log(this.props.entityAddress);
-
-  this.setState({ loading: true, errorMessage: '' });
-
-    try {
-      var ethJsUtil = require('ethereumjs-util');
-      const accounts = await web3.eth.getAccounts();
-      const entityAddress = this.props.entityAddress;
-      const tokenAddress = this.props.tokenAddress;
-      const futureAddress = ethJsUtil.bufferToHex(ethJsUtil.generateAddress(
-       entityAddress,
-       await web3.eth.getTransactionCount(entityAddress)));
-       console.log(futureAddress);
-       await entity.methods
-       .createCrowdsale(this.state.rate, this.props.entityAddress, this.props.tokenAddress)
-       .send({
-         from: accounts[0]
-       });
+     
      
     
-       await token.methods.transfer(futureAddress, web3.utils.toWei(this.state.supply, 'ether'));
 
-       Router.pushRoute(`/entities/${entityAddress}/token/${tokenAddress}/crowdsale/${futureAddress}/show`);
-     } catch (err) {
-       this.setState({ errorMessage: err.message });
-     }
+    };
+};
+    renderCards() {
+    const {
+      tokenAddress,
+      name,
+      symbol,
+      convertedSupply,
+      entityAddress,
+    
+  
+    } = this.props;
 
-     this.setState({ loading: false });
-   };
-   render() {
-     return (
-       <Fragment>
-      <Layout>
+    const items = [
 
-        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%', paddingBottom:'160px;', paddingTop:'100px'}}>
-          <h1 style={{color:'black'}}>Create new Crowdsale </h1>
-          <Form.Field>
-           <label>Token Price in ETH</label>
-           <Input
-             value={this.state.rate}
-             onChange={e => this.setState({rate: e.target.value}) }
-             />
-          </Form.Field>
-          <Form.Field>
-           <label>Token Available For Sale</label>
-           <Input
-             value={this.state.supply}
-             onChange={e => this.setState({supply: e.target.value}) }
-            />
-          </Form.Field>
+     {
+
+       header: "Entity",
+       meta: entityAddress,
+       
+       style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+     },
+      {
+
+        header: "Token Name",
+        meta: name,
         
-            <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary>Create!</Button>
-        </Form>
-      </Layout>
-      <Grid>
-      <Footer/>
+        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+      },
+      {
+
+       header: "Token Address",
+       meta: tokenAddress,
+       
+       style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+     },
+      {
+
+        header: "Token Symbol",
+        meta: symbol,
+     
+        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+      },
+    
+      {
+
+       header: "Total Supply",
+       meta: convertedSupply,
+    
+       style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+     },
+   
+ 
+
+    ];
+
+    return <Card.Group items={items} />;
+  }
+
+ render() {
+   return (
+     <Fragment>
+     <Layout>
+       <h3>Token Show</h3>
+       <Grid style={{marginTop:'100px'}}>
+   <Grid.Row>
+     <Grid.Column width={6}>{this.renderCards()}</Grid.Column>
+
+     <Grid.Column width={10}>
+       <CreateCrowdsaleForm entityAddress={this.props.entityAddress} tokenAddress={this.props.tokenAddress}/>
+
+     
+     
+
+     </Grid.Column>
+     
+   </Grid.Row>
+
+
       </Grid>
-      </Fragment>
-   )
-}
+
+     </Layout>
+     <Grid>
+  <Footer/>
+     </Grid>
+     </Fragment>
+   );
+ }
 }
 export default CrowdsaleNew

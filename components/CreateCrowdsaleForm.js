@@ -7,17 +7,18 @@ import { Router } from '../routes';
 
 class CreateCrowdsaleForm extends Component {
   state = {
-    rate: 0,
+    rate: '',
     errorMessage: '',
-    loading: false,
-    crowdsaleAddress: '',
-    supply: 0
+    loading: false
+  
+    
   };
 
-  onSubmitRate = async event => {
+  onSubmit = async event => {
     event.preventDefault();
 
     const entity = Entity(this.props.entityAddress);
+    const token = Token(this.props.tokenAddress);
     
     
 
@@ -37,8 +38,7 @@ class CreateCrowdsaleForm extends Component {
          .send({
            from: accounts[0]
          });
-         this.setState({crowdsaleAddress: crowdsaleAddress });
-         Router.replaceRoute(`/entities/${entityAddress}/show`);
+         Router.pushRoute(`/entities/${entityAddress}/token/${tokenAddress}/crowdsale/${crowdsaleAddress}/fund`);
     
     } catch (err) {
       this.setState({ errorMessage: err.message });
@@ -48,32 +48,15 @@ class CreateCrowdsaleForm extends Component {
 
   };
 
-  onSubmitTransfer = async event => {
-    event.preventDefault();
 
-    
-    const token = Token(this.props.tokenAddress);
-    
-
-  
-
-    try {
-        await token.methods.transfer(crowdsaleAddress, web3.utils.toWei(this.state.supply, 'ether'));
-      
-    } catch (err) {
-      this.setState({ errorMessage: err.message });
-    }
-
-    
-  };
 
 
   render() {
     return (
     <Fragment>
-      <Form onSubmit={this.onSubmitRate} error={!!this.state.errorMessage}>
+      <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{paddingBottom : '10px'}}>
         <Form.Field>
-          <label>Set Token Rate in Ether</label>
+          <label>Set Token Rate in Ether (Only Manager)</label>
           <Input
             value={this.state.rate}
             onChange={event => this.setState({ rate: event.target.value })}

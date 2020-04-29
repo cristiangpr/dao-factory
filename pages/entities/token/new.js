@@ -4,8 +4,7 @@ import Layout from '../../../components/Layout';
 import Footer from '../../../components/Footer';
 import Entity from '../../../ethereum/entity';
 import web3 from '../../../ethereum/web3';
-import { Link, Router } from '../../../routes.js'
-
+import { Link, Router } from '../../../routes.js';
 class TokenNew extends Component {
 
 
@@ -50,7 +49,7 @@ onSubmit = async event => {
          from: accounts[0]
        });
 
-     Router.pushRoute(`/entities/${entityAddress}/token/${futureAddress}/show`);
+     Router.pushRoute(`/entities/${entityAddress}/token/${futureAddress}/crowdsale/new`);
      } catch (err) {
        this.setState({ errorMessage: err.message });
      }
