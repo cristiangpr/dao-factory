@@ -7,7 +7,7 @@ import Entity from '../ethereum/entity';
 
 class RequestRow extends Component {
 onApprove = async () => {
-  const entity = Entity(this.props.address);
+  const entity = Entity(this.props.entityAddress);
 
   const accounts = await web3.eth.getAccounts();
   await entity.methods.approveRequest(this.props.id).send({
@@ -17,7 +17,7 @@ onApprove = async () => {
 };
 
 onFinalize = async () => {
-  const entity = Entity(this.props.address);
+  const entity = Entity(this.props.entityAddress);
 
   const accounts = await web3.eth.getAccounts();
   await entity.methods.finalizeRequest(this.props.id).send({

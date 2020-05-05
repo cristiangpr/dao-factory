@@ -31,7 +31,7 @@ class FundCrowdsaleForm extends Component {
         .send({from: accounts[0]});
 
     
-        Router.pushRoute(`/entities/${entityAddress}/show`);
+        Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
       
     } catch (err) {
       this.setState({ errorMessage: err.message });

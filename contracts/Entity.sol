@@ -6,6 +6,7 @@ import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol";
 import "node_modules/@openzeppelin/contracts/crowdsale/Crowdsale.sol";
 
 
+
 contract EntityFactory  {
     address[] public deployedEntities;
 
@@ -20,20 +21,13 @@ contract EntityFactory  {
 }
 contract Entity is Ownable {
 
-    struct Request{
-        string description;
-        uint value;
-        address payable recipient;
-        bool complete;
-        uint approvalCount;
-        mapping (address => bool) approvals;
 
-    }
     address public manager;
     uint public minimumContribution;
-    mapping (address => bool) public collaborators;
+    mapping (address => bool) public members;
     Request[] public requests;
-    uint public collaboratorsCount;
+  
+    uint public membersCount;
     string public entityName;
     string public missionDescription;
    
@@ -48,16 +42,35 @@ contract Entity is Ownable {
 
 
     }
+        struct Request {
+        string description;
+        uint value;
+        address payable recipient;
+        bool complete;
+        uint approvalCount;
+        mapping (address => bool) approvals;
+
+    }
+ 
     function () external payable {}
 
-    function contribute() public payable {
-        require(msg.value > minimumContribution);
+    function verify(address member) public onlyOwner {
+       require(!members[member]);
 
-        collaborators[ msg.sender] = true;
-        collaboratorsCount ++;
+        members[ member] = true;
+        membersCount ++;
+    }
+    
+      function unverify(address member) public onlyOwner {
+       require(members[member]);
+
+        members[ member] = false;
+        membersCount --;
     }
 
-    function createRequest(string memory  description, uint value, address payable recipient) public onlyOwner {
+
+    function createRequest(string memory  description, uint value, address payable recipient) public  {
+         require(members[msg.sender]);
          Request memory newRequest = Request ({
              description: description,
              value: value,
@@ -67,23 +80,27 @@ contract Entity is Ownable {
 
          });
          requests.push(newRequest);
+        
     }
-    function approveRequest(uint index) public {
+    
+function approveRequest(uint index) public {
         Request storage request = requests[index];
 
-        require(collaborators[msg.sender]);
+        require(members[msg.sender]);
         require(!request.approvals[msg.sender]);
 
         requests[index].approvals[msg.sender] = true;
        request.approvalCount ++;
     }
-    function finalizeRequest(uint index) public onlyOwner {
+    function finalizeRequest(uint index) public  {
+        require(msg.sender == manager);
         Request storage request = requests[index];
-        require(request.approvalCount > (collaboratorsCount / 2));
+        require(request.approvalCount > (membersCount / 2));
         require(!request.complete);
         request.recipient.transfer(request.value);
         request.complete = true;
     }
+  
     function getSummary() public view returns (
       uint, uint, uint, uint, address, string memory, string memory
       ) {
@@ -91,7 +108,7 @@ contract Entity is Ownable {
           minimumContribution,
           address(this).balance,
           requests.length,
-          collaboratorsCount,
+          membersCount,
           manager,
           entityName,
           missionDescription
@@ -135,6 +152,7 @@ contract SimpleCrowdsale is Crowdsale {
         Crowdsale(rate, wallet, token)
     {
     }
+  
 }
 
 contract Token is ERC20, ERC20Detailed, ERC20Mintable {
@@ -149,5 +167,3 @@ contract Token is ERC20, ERC20Detailed, ERC20Mintable {
        
     }
 }
-
-

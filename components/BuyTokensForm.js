@@ -22,6 +22,7 @@ class BuyTokensForm extends Component {
      console.log('yoyoy');
     const accounts = await web3.eth.getAccounts();
     const crowdsale = SimpleCrowdsale(this.props.crowdsaleAddress);
+    const entity = this.props.entityAddress;
     
     this.setState({ loading: true, errorMessage: '' });
   
@@ -30,13 +31,14 @@ class BuyTokensForm extends Component {
         await crowdsale.methods.buyTokens(accounts[0])
         .send({from: accounts[0], value: web3.utils.toWei(this.state.purchase, 'ether')});
 
-        Router.pushRoute(`/entities/${entityAddress}/show`);
+        
       
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
 
     this.setState({ loading: false, errorMessage: '' });
+    Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
   };
 
 

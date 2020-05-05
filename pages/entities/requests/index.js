@@ -12,7 +12,7 @@ class RequestIndex extends Component {
     const { entityAddress } = props.query;
     const entity = Entity(entityAddress);
     const requestCount = await entity.methods.getRequestsCount().call();
-    const collaboratorsCount = await entity.methods.collaboratorsCount().call();
+    const membersCount = await entity.methods.membersCount().call();
 
     const requests = await Promise.all(
       Array(parseInt(requestCount))
@@ -22,7 +22,7 @@ class RequestIndex extends Component {
         })
     );
 
-    return { entityAddress, requests, requestCount, collaboratorsCount };
+    return { entityAddress, requests, requestCount, membersCount };
   }
 
   renderRows() {
@@ -33,7 +33,7 @@ class RequestIndex extends Component {
             id={index}
             request={request}
             entityAddress={this.props.entityAddress}
-            approversCount={this.props.collaboratorsCount}
+            approversCount={this.props.membersCount}
           />
         );
       });

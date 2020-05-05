@@ -4,7 +4,7 @@ import { Card, Button, Grid, Container } from 'semantic-ui-react';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer';
 import Carousel from 'react-bootstrap/Carousel';
-import ethJsUtil from 'ethereumjs-util';
+
 
 
 import { Link } from '../routes.js'
@@ -108,7 +108,7 @@ render(){
      </Grid.Column>
 
         <Grid.Column width={4} style={{paddingLeft:'0'}}>
-         <Card style={{height:'200px', background:'#0F93FE', textAlign:'center', width:'100%',  fontSize:'3em', paddingLeft:'0'}}
+         <Card style={{height:'200px', background:'#0F93FE', textAlign:'center', width:'100%',  fontSize:'2.9em', paddingLeft:'0'}}
 
            header='Benefit Corporation'
            href='/entityIndex'
