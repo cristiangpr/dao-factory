@@ -3,7 +3,7 @@ import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import Footer from '../../components/Footer';
 import Entity from '../../ethereum/entity';
-import SimpleCrowdsale from '../../ethereum/simpleCrowdsale';
+
 import MebershipForm from '../../components/MembershipForm'
 import web3 from '../../ethereum/web3';
 
@@ -15,7 +15,7 @@ class Dashboard extends Component {
      const entity = Entity(props.query.entityAddress);
      const summary = await entity.methods.getSummary().call();
      const tokens = await entity.methods.getDeployedTokens().call();
-     const crowdsales = await entity.methods.getDeployedCrowdsales().call();
+    
      const requestCount = await entity.methods.getRequestsCount().call();
      const membersCount = await entity.methods.membersCount().call();
  
@@ -139,21 +139,6 @@ class Dashboard extends Component {
     });
     return <Card.Group items={items} style={{paddingBottom:'250px'}} />
   }
-  renderCrowdsales() {
-    const items = this.props.crowdsales.map(crowdsale => {
-      return {
-        style:{background:'#0F93FE'},
-        header: crowdsale,
-        description: (
-          <Link route={`/entities/${this.props.entityAddress}/crowdsale/${crowdsale}/show`}>
-          <a>View Crowdsale</a>
-          </Link>
-        ),
-        fluid: true
-      }
-    });
-    return <Card.Group items={items} style={{paddingBottom:'250px'}} />
-  }
 
 
 
@@ -175,7 +160,7 @@ class Dashboard extends Component {
       </Grid.Column>
       <Grid.Column width={4}>
       <h3 style={{color: 'black'}} >Open Token Crowdsales</h3>
-      {this.renderCrowdsales()}
+    
       </Grid.Column>
 
       <Grid.Column width={4}>

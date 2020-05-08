@@ -9,11 +9,14 @@ import { Link, Router } from '../../routes.js'
 
 class EntityNew extends Component {
   state = {
-    minimumContribution: '',
+   
     errorMessage: '',
     loading: false,
     entityName: '',
-    missionDescription: ''
+    missionDescription: '',
+    tokenName: '',
+    tokenSymbol: '',
+    rate: ''
   };
   onSubmit = async event => {
     event.preventDefault();
@@ -22,7 +25,7 @@ class EntityNew extends Component {
     try {
       var ethJsUtil = require('ethereumjs-util');
        const accounts = await web3.eth.getAccounts();
-       const contractFactoryAddress = '0x0f8B6249740b41D79cbaba61a39F52e8E5b415D1';
+       const contractFactoryAddress = '0x52c16D844B5ba5d386e081dAC81fcb81a796B537';
        const futureAddress = ethJsUtil.bufferToHex(ethJsUtil.generateAddress(
         contractFactoryAddress,
         await web3.eth.getTransactionCount(contractFactoryAddress)));
@@ -30,7 +33,7 @@ class EntityNew extends Component {
         console.log(contractFactoryAddress);
       
        await factory.methods
-         .createEntity(this.state.minimumContribution, this.state.entityName, this.state.missionDescription)
+         .createEntity(this.state.entityName, this.state.missionDescription, this.state.tokenName, this.state.tokenSymbol, this.state.rate)
          .send({
            from: accounts[0]
          });
@@ -50,14 +53,7 @@ class EntityNew extends Component {
 
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%', paddingBottom:'160px', paddingTop:'100px'}}>
           <h1 style={{color:'black'}}>Create new entity</h1>
-          <Form.Field>
-           <label>Minimum Contribution</label>
-           <Input
-             value={this.state.minimumContribution}
-             onChange={e => this.setState({minimumContribution: e.target.value}) }
-             label="wei"
-             labelPosition="right"/>
-          </Form.Field>
+      
           <Form.Field>
            <label>Entity Name</label>
            <Input
@@ -72,6 +68,31 @@ class EntityNew extends Component {
              onChange={e => this.setState({missionDescription: e.target.value}) }
              />
           </Form.Field>
+    
+       
+          <Form.Field>
+           <label>Token Name</label>
+           <Input
+             value={this.state.tokenName}
+             onChange={e => this.setState({tokenName: e.target.value}) }
+           />
+          </Form.Field>
+          <Form.Field>
+           <label>Token Symbol</label>
+           <Input
+             value={this.state.tokenSymbol}
+             onChange={e => this.setState({tokenSymbol: e.target.value}) }
+           />
+          </Form.Field>
+          <Form.Field>
+           <label>Token Rate. Enter amount of tokens equal to 1 ETH</label>
+           <Input
+             value={this.state.rate}
+             onChange={e => this.setState({rate: e.target.value}) }
+             label="Tokens per ETH"
+             labelPosition="right"/>
+          </Form.Field>
+          
             <Message error header="Oops!" content={this.state.errorMessage} />
           <Button loading={this.state.loading} primary>Create!</Button>
         </Form>

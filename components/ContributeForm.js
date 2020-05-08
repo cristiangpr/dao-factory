@@ -8,13 +8,13 @@ class ContributeForm extends Component {
   state = {
     value: '',
     errorMessage: '',
-    loading: false
+    loading: false,
   };
 
   onSubmit = async event => {
     event.preventDefault();
 
-    const entity = Entity(this.props.address);
+    const entity = Entity(this.props.entityAddress);
 
     this.setState({ loading: true, errorMessage: '' });
 
@@ -25,7 +25,7 @@ class ContributeForm extends Component {
         value: web3.utils.toWei(this.state.value, 'ether')
       });
 
-      Router.replaceRoute(`/entities/${this.props.address}`);
+      Router.replaceRoute(`/entities/${this.props.entityAddress}/show`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -41,14 +41,14 @@ class ContributeForm extends Component {
           <Input
             value={this.state.value}
             onChange={event => this.setState({ value: event.target.value })}
-            label="ether"
+            label="ETH"
             labelPosition="right"
           />
         </Form.Field>
 
         <Message error header="Oops!" content={this.state.errorMessage} />
         <Button primary loading={this.state.loading}>
-          Contribute!
+          Buy Tokens!
         </Button>
       </Form>
     );

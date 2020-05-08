@@ -13,7 +13,7 @@ onApprove = async () => {
   await entity.methods.approveRequest(this.props.id).send({
     from: accounts[0]
   });
-
+  Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
 };
 
 onFinalize = async () => {
@@ -23,7 +23,7 @@ onFinalize = async () => {
   await entity.methods.finalizeRequest(this.props.id).send({
     from: accounts[0]
   });
-
+  Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
 };
 
 render() {

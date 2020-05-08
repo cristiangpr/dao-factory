@@ -9,7 +9,9 @@ class MembershipForm extends Component {
     memberAdd: '',
     memberRemove: '',
     errorMessage: '',
-    loading: false
+    errorMessage2: '',
+    loading: false,
+    loading2: false
   };
 
   onSubmitAdd = async event => {
@@ -40,7 +42,7 @@ class MembershipForm extends Component {
 
     const entity = Entity(this.props.entityAddress);
 
-    this.setState({ loading: true, errorMessage: '' });
+    this.setState({ loading2: true, errorMessage2: '' });
 
     try {
       const accounts = await web3.eth.getAccounts();
@@ -51,10 +53,10 @@ class MembershipForm extends Component {
 
       Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
     } catch (err) {
-      this.setState({ errorMessage: err.message });
+      this.setState({ errorMessage2: err.message });
     }
 
-    this.setState({ loading: false, value: '' });
+    this.setState({ loading2: false, value: '' });
     Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
   };
 
@@ -79,7 +81,7 @@ class MembershipForm extends Component {
         </Button>
       </Form>
 
-<Form onSubmit={this.onSubmitRemove} error={!!this.state.errorMessage}>
+<Form onSubmit={this.onSubmitRemove} error={!!this.state.errorMessage2}>
 <Form.Field>
   <label>Address to remove</label>
   <Input
@@ -90,8 +92,8 @@ class MembershipForm extends Component {
   />
 </Form.Field>
 
-<Message error header="Oops!" content={this.state.errorMessage} />
-<Button primary loading={this.state.loading}>
+<Message error header="Oops!" content={this.state.errorMessage2} />
+<Button primary loading={this.state.loading2}>
   Remove Member!
 </Button>
 </Form>

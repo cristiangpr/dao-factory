@@ -3,15 +3,15 @@ import "node_modules/@openzeppelin/contracts/ownership/Ownable.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol";
-import "node_modules/@openzeppelin/contracts/crowdsale/Crowdsale.sol";
+
 
 
 
 contract EntityFactory  {
     address[] public deployedEntities;
 
-    function createEntity(uint minimum, string memory name, string memory mission) public {
-        address newEntity = address(new Entity(minimum, name, mission, msg.sender));
+    function createEntity(string memory name, string memory mission, string memory tokenName, string memory tokenSymbol, uint rate) public {
+        address newEntity = address(new Entity(name, mission, msg.sender, tokenName, tokenSymbol, rate));
         deployedEntities.push(address(newEntity));
       
     }
@@ -23,28 +23,35 @@ contract Entity is Ownable {
 
 
     address public manager;
-    uint public minimumContribution;
+
     mapping (address => bool) public members;
     Request[] public requests;
-  
+    uint public tokenRate;
     uint public membersCount;
     string public entityName;
     string public missionDescription;
+  
+    Token public token;
+    
+    
    
 
-     constructor(uint minimum, string memory name, string memory mission, address creator) public {
+     constructor(string memory name, string memory mission, address creator, string memory tokenName, string memory tokenSymbol, uint rate) public {
         manager = creator;
-        minimumContribution = minimum;
         entityName = name;
         missionDescription = mission;
+        tokenRate = rate;
          transferOwnership(manager);
-    
+         members[manager] = true;
+         membersCount ++;
+        token = new Token( tokenName, tokenSymbol, msg.sender);
 
 
     }
         struct Request {
         string description;
         uint value;
+        uint compFactor;
         address payable recipient;
         bool complete;
         uint approvalCount;
@@ -52,28 +59,29 @@ contract Entity is Ownable {
 
     }
  
-    function () external payable {}
+ 
 
     function verify(address member) public onlyOwner {
        require(!members[member]);
 
-        members[ member] = true;
+        members[member] = true;
         membersCount ++;
     }
     
       function unverify(address member) public onlyOwner {
        require(members[member]);
 
-        members[ member] = false;
+        members[member] = false;
         membersCount --;
     }
 
 
-    function createRequest(string memory  description, uint value, address payable recipient) public  {
+    function createRequest(string memory  description, uint value, uint compFactor, address payable recipient) public  {
          require(members[msg.sender]);
          Request memory newRequest = Request ({
              description: description,
              value: value,
+             compFactor: compFactor,
              recipient: recipient,
              complete: false,
              approvalCount: 0
@@ -92,20 +100,25 @@ function approveRequest(uint index) public {
         requests[index].approvals[msg.sender] = true;
        request.approvalCount ++;
     }
-    function finalizeRequest(uint index) public  {
-        require(msg.sender == manager);
+    function finalizeRequest(uint index) public onlyOwner {
+      
         Request storage request = requests[index];
         require(request.approvalCount > (membersCount / 2));
         require(!request.complete);
-        request.recipient.transfer(request.value);
+        token.mint(request.recipient, request.value * request.compFactor);
         request.complete = true;
     }
-  
+       function contribute() public payable {
+        
+      
+        uint256 value = msg.value * tokenRate;
+         token.mint(msg.sender, value);
+    }
     function getSummary() public view returns (
-      uint, uint, uint, uint, address, string memory, string memory
+       uint, uint, uint, address, string memory, string memory
       ) {
         return (
-          minimumContribution,
+    
           address(this).balance,
           requests.length,
           membersCount,
@@ -118,52 +131,23 @@ function approveRequest(uint index) public {
     function getRequestsCount() public view returns (uint) {
         return requests.length;
     }
-        address[] public deployedTokens;
+        
 
-    function createToken(uint initialSupply, string memory name, string memory symbol) public onlyOwner {
-        address newToken = address(new Token(initialSupply, name, symbol, msg.sender));
-        deployedTokens.push(address(newToken));
-    
-      
-    }
-    function getDeployedTokens() public view returns(address[] memory) {
-        return deployedTokens;
-    }
-            address[] public deployedCrowdsales;
 
-    function createCrowdsale(uint256 rate, address payable wallet,  IERC20 token) public onlyOwner {
-        address newCrowdsale = address(new SimpleCrowdsale(rate, wallet, token));
-        deployedCrowdsales.push(address(newCrowdsale));
-    
-      
-    }
-    function getDeployedCrowdsales() public view returns(address[] memory) {
-        return deployedCrowdsales;
-    }
-}
 
-contract SimpleCrowdsale is Crowdsale {
-    constructor (
-        uint256 rate,
-        address payable wallet,
-        IERC20 token
-    )
-        public
-        Crowdsale(rate, wallet, token)
-    {
-    }
+
   
 }
 
 contract Token is ERC20, ERC20Detailed, ERC20Mintable {
  
-
+    
 
     
-     constructor(uint256 initialSupply, string memory name, string memory symbol, address minter) ERC20Detailed(name, symbol, 18) public {
- 
-        mint(minter, initialSupply);
-        addMinter(minter);
+     constructor( string memory name, string memory symbol, address minter) ERC20Detailed(name, symbol, 18) public {
+      
+        mint(minter, 0);
+  
        
     }
 }

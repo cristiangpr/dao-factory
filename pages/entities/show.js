@@ -3,32 +3,35 @@ import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import Footer from '../../components/Footer';
 import Entity from '../../ethereum/entity';
-import SimpleCrowdsale from '../../ethereum/simpleCrowdsale';
-import ContributeForm from '../../components/ContributeForm'
+import Token from '../../ethereum/token';
+
+import MembershipForm from '../../components/MembershipForm';
 import web3 from '../../ethereum/web3';
 
 import { Link } from '../../routes';
 
 class EntityShow extends Component {
    static async getInitialProps(props){
-     const entity = Entity(props.query.entityAddress);
+     const entity = await Entity(props.query.entityAddress);
      const summary = await entity.methods.getSummary().call();
-     const tokens = await entity.methods.getDeployedTokens().call();
-     const crowdsales = await entity.methods.getDeployedCrowdsales().call();
+     const tokenAddress = await entity.methods.token().call();
+     const token = await Token(tokenAddress);
+     const symbol = await token.methods.symbol().call();
+     
      
      console.log(summary);
      return {
        entityAddress: props.query.entityAddress,
-      
-       tokens : tokens,
-       crowdsales : crowdsales,
-       minimumContribution: summary[0],
-       balance: summary[1],
-       requestsCount: summary[2],
-       approversCount: summary[3],
-       manager: summary[4],
-       name: summary[5],
-       mission: summary[6]
+      tokenAddress: tokenAddress,
+       token : token,
+       symbol: symbol,
+     
+       balance: summary[0],
+       requestsCount: summary[1],
+       approversCount: summary[2],
+       manager: summary[3],
+       name: summary[4],
+       mission: summary[5]
 
      };
 };
@@ -59,22 +62,16 @@ class EntityShow extends Component {
          header: manager,
          meta: 'Address of Manager',
          description:
-           'The manager created this entity and can create requests to withdraw money',
+           'The manager created this entity',
          style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
        },
-       {
-           style:{background:'rgba(247, 138, 42, 1)'},
-         header: minimumContribution,
-         meta: 'Minimum Contribution (wei)',
-         description:
-           'You must contribute at least this much wei to become an member'
-       },
+
        {
            style:{background:'rgba(247, 138, 42, 1)'},
          header: requestsCount,
-         meta: 'Number of Requests',
+         meta: 'Number of Payment Requests',
          description:
-           'A request tries to withdraw money from the contract. Requests must be approved by members'
+           'Requests for Payment of Work. Requests must be approved by members'
        },
        {
            style:{background:'rgba(247, 138, 42, 1)'},
@@ -95,36 +92,22 @@ class EntityShow extends Component {
      return <Card.Group items={items} />;
    }
 
-   renderTokens() {
-    const items = this.props.tokens.map(token => {
-      return {
-        style:{background:'rgba(247, 138, 42, 1)'},
-        header: token,
+   renderToken() {
+    const items = [
+    {
+        style:{background:'#9933ff'},
+        header: this.props.symbol,
         description: (
-          <Link route={`/entities/${this.props.entityAddress}/token/${token}/show`}>
+          <Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/show`}>
           <a>View Token</a>
           </Link>
         ),
         fluid: true
       }
-    });
-    return <Card.Group items={items} style={{paddingBottom:'250px'}} />
+    ];
+    return <Card.Group items={items}  />
   }
-  renderCrowdsales() {
-    const items = this.props.crowdsales.map(crowdsale => {
-      return {
-        style:{background:'#0F93FE'},
-        header: crowdsale,
-        description: (
-          <Link route={`/entities/${this.props.entityAddress}/crowdsale/${crowdsale}/show`}>
-          <a>View Crowdsale</a>
-          </Link>
-        ),
-        fluid: true
-      }
-    });
-    return <Card.Group items={items} style={{paddingBottom:'250px'}} />
-  }
+
 
 
 
@@ -138,27 +121,20 @@ class EntityShow extends Component {
       <Grid.Column width={10}> <h3 style={{color: 'black'}}>Entity</h3>{this.renderCards()}</Grid.Column>
 
       <Grid.Column width={6}>
-      <h3 style={{color: 'black'}} >Open Token Crowdsales</h3>
-      {this.renderCrowdsales()}
+      <h3 style={{color: 'black'}} >Token</h3>
+     {this.renderToken()}
+     <h3 style={{color: 'black'}} >Add or Remove Members</h3>
+     <MembershipForm entityAddress={this.props.entityAddress}/>
       </Grid.Column>
     </Grid.Row>
     <Grid.Row>
          <Grid.Column>
            <Link route={`/entities/${this.props.entityAddress}/requests`}>
              <a>
-               <Button primary>View Requests</Button>
+               <Button primary>View Payment Requests</Button>
              </a>
            </Link>
-           <Link route={`/entities/${this.props.entityAddress}/token/new`}>
-             <a>
-               <Button primary>Create Tokens</Button>
-             </a>
-           </Link>
-           <Link route={`/entities/${this.props.entityAddress}/token`}>
-             <a>
-               <Button primary>View Tokens</Button>
-             </a>
-           </Link>
+    
            
            <Link route={`/entities/${this.props.entityAddress}/dashboard`}>
              <a>

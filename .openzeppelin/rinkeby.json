@@ -1,11 +1,11 @@
 {
   "contracts": {
     "EntityFactory": {
-      "address": "0xF25eAd517E051Cb25032012A1F1452d81C6D5630",
-      "constructorCode": "608060405234801561001057600080fd5b50615da5806100206000396000f3fe",
-      "bodyBytecodeHash": "2653d924a06e57e97403eaf3ef477959ef97116d5c848c67b03aebfbc229cfa1",
-      "localBytecodeHash": "3fec88947ed30a980f7957469087bf6f30bd2de9c29334b73efb89b1369b069e",
-      "deployedBytecodeHash": "3fec88947ed30a980f7957469087bf6f30bd2de9c29334b73efb89b1369b069e",
+      "address": "0x4896d1bE08101b879088e4ce998Bae03eBCed1aC",
+      "constructorCode": "608060405234801561001057600080fd5b50614d79806100206000396000f3fe",
+      "bodyBytecodeHash": "7063c8cc83d9ad88f9a18e6ecd9c3bfe7bcecbd52901d463136af78f36a30c91",
+      "localBytecodeHash": "dd553958aa53b9143c1bf619667cbacee57b6d71cf1b1992c1c04fadc2cda1a3",
+      "deployedBytecodeHash": "dd553958aa53b9143c1bf619667cbacee57b6d71cf1b1992c1c04fadc2cda1a3",
       "types": {
         "t_address": {
           "id": "t_address",
@@ -25,9 +25,9 @@
           "contract": "EntityFactory",
           "path": "contracts/Entity.sol",
           "label": "deployedEntities",
-          "astId": 9,
+          "astId": 8,
           "type": "t_array:dyn<t_address>",
-          "src": "420:33:0"
+          "src": "350:33:0"
         }
       ],
       "warnings": {
@@ -43,10 +43,10 @@
   "proxies": {
     "cc.io/EntityFactory": [
       {
-        "address": "0x0f8B6249740b41D79cbaba61a39F52e8E5b415D1",
+        "address": "0x52c16D844B5ba5d386e081dAC81fcb81a796B537",
         "version": "1.0.0",
-        "implementation": "0xF25eAd517E051Cb25032012A1F1452d81C6D5630",
-        "admin": "0x583721F4680383337159c42C2e89BFfB9f338765",
+        "implementation": "0x4896d1bE08101b879088e4ce998Bae03eBCed1aC",
+        "admin": "0xFA1fEA66001522b4DE510c9F1D2d8D9B291553b4",
         "kind": "Upgradeable"
       }
     ]
@@ -54,6 +54,6 @@
   "manifestVersion": "2.2",
   "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0x583721F4680383337159c42C2e89BFfB9f338765"
+    "address": "0xFA1fEA66001522b4DE510c9F1D2d8D9B291553b4"
   }
 }

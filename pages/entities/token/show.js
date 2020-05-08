@@ -5,7 +5,7 @@ import Layout from '../../../components/Layout';
 import Footer from '../../../components/Footer';
 import Token from '../../../ethereum/token';
 import Entity from '../../../ethereum/entity';
-import CreateCrowdsaleForm from '../../../components/CreateCrowdsaleForm'
+import ContributeForm from '../../../components/ContributeForm'
 import web3 from '../../../ethereum/web3';
 
 import { Link } from '../../../routes';
@@ -13,6 +13,8 @@ import { Link } from '../../../routes';
 class TokenShow extends Component {
    static async getInitialProps(props){
      const token = await Token(props.query.tokenAddress);
+     const entity = await Entity(props.query.entityAddress);
+     const tokenRate = await entity.methods.tokenRate().call();
      const name = await token.methods.name().call();
      const symbol = await token.methods.symbol().call();
      const totalSupply = await token.methods.totalSupply().call();
@@ -26,6 +28,7 @@ class TokenShow extends Component {
     
      return {
        tokenAddress: props.query.tokenAddress,
+       tokenRate: tokenRate,
        name: name,
        symbol: symbol,
        entityAddress: props.query.entityAddress,
@@ -45,7 +48,8 @@ class TokenShow extends Component {
        convertedSupply,
        entityAddress,
        convertedBalance,
-       convertedMyBalance
+       convertedMyBalance,
+       tokenRate
      } = this.props;
 
      const items = [
@@ -87,8 +91,8 @@ class TokenShow extends Component {
       },
       {
 
-        header: "Available for Sale",
-        meta: convertedBalance,
+        header: "Token Rate to ETH",
+        meta: tokenRate,
      
         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
       },
@@ -114,7 +118,7 @@ class TokenShow extends Component {
       <Grid.Column width={6}>{this.renderCards()}</Grid.Column>
 
       <Grid.Column width={10}>
-        <CreateCrowdsaleForm entityAddress={this.props.entityAddress} tokenAddress={this.props.tokenAddress}/>
+        <ContributeForm entityAddress={this.props.entityAddress} tokenAddress={this.props.tokenAddress}/>
 
       
 

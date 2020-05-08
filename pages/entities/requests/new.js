@@ -11,7 +11,7 @@ class RequestNew extends Component {
 state = {
   value: '',
   description: '',
-  recipient: '',
+  compFactor: '',
   loading: false,
   errorMessage: ''
 };
@@ -26,14 +26,14 @@ onSubmit = async event => {
   event.preventDefault();
 
   const entity = Entity(this.props.entityAddress);
-  const { description, value, recipient } = this.state;
+  const { description, value, compFactor } = this.state;
 
   this.setState({ loading: true, errorMessage: '' });
 
   try {
     const accounts = await web3.eth.getAccounts();
     await entity.methods
-      .createRequest(description, web3.utils.toWei(value, 'ether'), recipient)
+      .createRequest(description, web3.utils.toWei(value, 'ether'),compFactor, accounts[0])
       .send({ from: accounts[0] });
 
     Router.pushRoute(`/entities/${this.props.entityAddress}/requests`);
@@ -54,7 +54,7 @@ render() {
       <h3>Create a Request</h3>
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%', paddingBottom:'100px'}}>
         <Form.Field>
-          <label>Description</label>
+          <label>Description of Work</label>
           <Input
             value={this.state.description}
             onChange={event =>
@@ -63,7 +63,7 @@ render() {
         </Form.Field>
 
         <Form.Field>
-          <label>Value in Ether</label>
+          <label>Hours Worked</label>
           <Input
             value={this.state.value}
             onChange={event => this.setState({ value: event.target.value })}
@@ -71,11 +71,11 @@ render() {
         </Form.Field>
 
         <Form.Field>
-          <label>Recipient</label>
+          <label>Compensation Level</label>
           <Input
             value={this.state.recipient}
             onChange={event =>
-              this.setState({ recipient: event.target.value })}
+              this.setState({compFactor: event.target.value })}
           />
         </Form.Field>
 

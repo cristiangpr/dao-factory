@@ -56,11 +56,11 @@ class CreateCrowdsaleForm extends Component {
     <Fragment>
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{paddingBottom : '10px'}}>
         <Form.Field>
-          <label>Set Token Rate in Ether (Only Manager)</label>
+          <label>Set Token Rate. Enter amount equal to 1 ETH</label>
           <Input
             value={this.state.rate}
             onChange={event => this.setState({ rate: event.target.value })}
-            label="ether"
+            label="token"
             labelPosition="right"
           />
         </Form.Field>
