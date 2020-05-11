@@ -3,6 +3,6 @@ import EntityFactory from '../build/contracts/EntityFactory.json';
 
 const instance = new web3.eth.Contract(
   EntityFactory.abi,
-  '0x2280911a84fA38b915acFaaBcac03Bc849Ee79Aa'
+  '0x06A5Aa83545821eA105444D765d861fA5CE58260'
 )
 export default instance;
