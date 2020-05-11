@@ -25,7 +25,7 @@ class EntityNew extends Component {
     try {
       var ethJsUtil = require('ethereumjs-util');
        const accounts = await web3.eth.getAccounts();
-       const contractFactoryAddress = '0xaDB1Cbd88B827CC4d34C28C0D0C192a61e70a050';
+       const contractFactoryAddress = '0xa264304D3AAe61e1715dc0cc7AAC8ade3FA9d95C';
        const futureAddress = ethJsUtil.bufferToHex(ethJsUtil.generateAddress(
         contractFactoryAddress,
         await web3.eth.getTransactionCount(contractFactoryAddress)));
