@@ -3,6 +3,7 @@ import "node_modules/@openzeppelin/contracts/ownership/Ownable.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol";
+import "node_modules/@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 
 
 
@@ -119,7 +120,7 @@ function approveRequest(uint index) public {
    
     function sellTokens(address payable member,  uint amount) public onlyMembers {
        
-       token.transferFrom(member, address(this), amount);
+       token.burnFrom(member, amount);
        member.transfer(amount / tokenRate);
     
       
@@ -157,7 +158,7 @@ function approveRequest(uint index) public {
   
 }
 
-contract Token is ERC20, ERC20Detailed, ERC20Mintable {
+contract Token is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable {
  
     
 

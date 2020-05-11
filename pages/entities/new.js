@@ -25,7 +25,7 @@ class EntityNew extends Component {
     try {
       var ethJsUtil = require('ethereumjs-util');
        const accounts = await web3.eth.getAccounts();
-       const contractFactoryAddress = '0xa264304D3AAe61e1715dc0cc7AAC8ade3FA9d95C';
+       const contractFactoryAddress = '0x4d30d59A474aD55e4A8eDA9698e6e5a18fC0A8cf';
        const futureAddress = ethJsUtil.bufferToHex(ethJsUtil.generateAddress(
         contractFactoryAddress,
         await web3.eth.getTransactionCount(contractFactoryAddress)));
@@ -85,7 +85,7 @@ class EntityNew extends Component {
            />
           </Form.Field>
           <Form.Field>
-           <label>Token Rate. Enter amount of tokens equal to 1 ETH</label>
+           <label>Token Rate. Enter amount of tokens equal to 1 ETH. Must be an integer</label>
            <Input
              value={this.state.rate}
              onChange={e => this.setState({rate: e.target.value}) }

@@ -16,6 +16,7 @@ class TokenShow extends Component {
      const token = await Token(props.query.tokenAddress);
      const entity = await Entity(props.query.entityAddress);
      const tokenRate = await entity.methods.tokenRate().call();
+     const rate = await web3.utils.fromWei(tokenRate, 'ether');
      const name = await token.methods.name().call();
      const symbol = await token.methods.symbol().call();
      const totalSupply = await token.methods.totalSupply().call();
@@ -36,7 +37,9 @@ class TokenShow extends Component {
        convertedBalance: convertedBalance,
        convertedSupply : convertedSupply,
        convertedMyBalance : convertedMyBalance,
-       accounts : accounts
+       accounts : accounts,
+       rate : rate,
+       myBalance: myBalance
       
      
 
@@ -51,7 +54,9 @@ class TokenShow extends Component {
        entityAddress,
        convertedBalance,
        convertedMyBalance,
-       tokenRate
+       tokenRate,
+       rate,
+       myBalance
      } = this.props;
 
      const items = [
@@ -94,7 +99,7 @@ class TokenShow extends Component {
       {
 
         header: "Token Rate to ETH",
-        meta: tokenRate,
+        meta: rate,
      
         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
       },

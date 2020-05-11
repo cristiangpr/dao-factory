@@ -1,11 +1,11 @@
 {
   "contracts": {
     "EntityFactory": {
-      "address": "0xaDB1Cbd88B827CC4d34C28C0D0C192a61e70a050",
-      "constructorCode": "608060405234801561001057600080fd5b50615014806100206000396000f3fe",
-      "bodyBytecodeHash": "91bba93408a83b370dcd52de2fa76ca58b321d5b7d853daabf8962112497b292",
-      "localBytecodeHash": "676e2bf9f862516cea1f32064499d9dafcb53814d906b96e1afb49e589116ae4",
-      "deployedBytecodeHash": "676e2bf9f862516cea1f32064499d9dafcb53814d906b96e1afb49e589116ae4",
+      "address": "0x0Cd8d42D8a3c13794a648BAef9D278936FA0a6ED",
+      "constructorCode": "608060405234801561001057600080fd5b506153a8806100206000396000f3fe",
+      "bodyBytecodeHash": "02c8fba6469f6a1802a9367b689f3b9fa2802ec1e6b52004a41065362d9ca2df",
+      "localBytecodeHash": "ac1fd05d6284ee225304c1f0f4239c52403277150a6b01f429d4f19279cb8fb3",
+      "deployedBytecodeHash": "ac1fd05d6284ee225304c1f0f4239c52403277150a6b01f429d4f19279cb8fb3",
       "types": {
         "t_address": {
           "id": "t_address",
@@ -25,9 +25,9 @@
           "contract": "EntityFactory",
           "path": "contracts/Entity.sol",
           "label": "deployedEntities",
-          "astId": 8,
+          "astId": 9,
           "type": "t_array:dyn<t_address>",
-          "src": "350:33:0"
+          "src": "427:33:0"
         }
       ],
       "warnings": {
@@ -43,10 +43,10 @@
   "proxies": {
     "cc.io/EntityFactory": [
       {
-        "address": "0xa264304D3AAe61e1715dc0cc7AAC8ade3FA9d95C",
+        "address": "0x4d30d59A474aD55e4A8eDA9698e6e5a18fC0A8cf",
         "version": "1.0.0",
-        "implementation": "0xaDB1Cbd88B827CC4d34C28C0D0C192a61e70a050",
-        "admin": "0x837398f8c266641435e586506A165c319EA6fb37",
+        "implementation": "0x0Cd8d42D8a3c13794a648BAef9D278936FA0a6ED",
+        "admin": "0x0903Ae97d9F0334Fe61CB86126aA8CCe97926928",
         "kind": "Upgradeable"
       }
     ]
@@ -54,6 +54,6 @@
   "manifestVersion": "2.2",
   "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0x837398f8c266641435e586506A165c319EA6fb37"
+    "address": "0x0903Ae97d9F0334Fe61CB86126aA8CCe97926928"
   }
 }
