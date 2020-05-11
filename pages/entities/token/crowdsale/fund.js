@@ -4,8 +4,7 @@ import Layout from '../../../../components/Layout';
 import Footer from '../../../../components/Footer';
 import Token from '../../../../ethereum/token';
 import Entity from '../../../../ethereum/entity';
-import SimpleCrowdsale from '../../../../ethereum/simpleCrowdsale';
-import FundCrowdsaleForm from '../../../../components/FundCrowdsaleForm'
+
 import web3 from '../../../../ethereum/web3';
 
 import { Link } from '../../../../routes';
