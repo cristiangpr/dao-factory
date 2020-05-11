@@ -5,7 +5,8 @@ import Layout from '../../../components/Layout';
 import Footer from '../../../components/Footer';
 import Token from '../../../ethereum/token';
 import Entity from '../../../ethereum/entity';
-import ContributeForm from '../../../components/ContributeForm'
+import ContributeForm from '../../../components/ContributeForm';
+import SellTokensForm from '../../../components/SellTokensForm'
 import web3 from '../../../ethereum/web3';
 
 import { Link } from '../../../routes';
@@ -35,6 +36,7 @@ class TokenShow extends Component {
        convertedBalance: convertedBalance,
        convertedSupply : convertedSupply,
        convertedMyBalance : convertedMyBalance,
+       accounts : accounts
       
      
 
@@ -118,7 +120,8 @@ class TokenShow extends Component {
       <Grid.Column width={6}>{this.renderCards()}</Grid.Column>
 
       <Grid.Column width={10}>
-        <ContributeForm entityAddress={this.props.entityAddress} tokenAddress={this.props.tokenAddress}/>
+        <ContributeForm tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
+        <SellTokensForm  tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
 
       
 

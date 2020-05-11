@@ -57,7 +57,8 @@ class RequestIndex extends Component {
             <Row>
               <HeaderCell>ID</HeaderCell>
               <HeaderCell>Description</HeaderCell>
-              <HeaderCell>Amount</HeaderCell>
+              <HeaderCell>Hours</HeaderCell>
+              <HeaderCell>Compensation Level</HeaderCell>
               <HeaderCell>Recipient</HeaderCell>
               <HeaderCell>Approval Count</HeaderCell>
               <HeaderCell>Approve</HeaderCell>

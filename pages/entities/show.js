@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import Footer from '../../components/Footer';
 import Entity from '../../ethereum/entity';
 import Token from '../../ethereum/token';
-
+import TokenBalanceForm from '../../components/TokenBalanceForm';
 import MembershipForm from '../../components/MembershipForm';
 import web3 from '../../ethereum/web3';
 
@@ -59,8 +59,16 @@ class EntityShow extends Component {
        },
        {
 
-         header: manager,
-         meta: 'Address of Manager',
+        header:  'Entity address:',
+        meta: entityAddress,
+     
+        
+        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+      },
+       {
+
+         header: 'Address of Manager',
+         meta: manager,
          description:
            'The manager created this entity',
          style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
@@ -68,24 +76,24 @@ class EntityShow extends Component {
 
        {
            style:{background:'rgba(247, 138, 42, 1)'},
-         header: requestsCount,
-         meta: 'Number of Payment Requests',
+         header: 'Number of Payment Requests',
+         meta: requestsCount,
          description:
-           'Requests for Payment of Work. Requests must be approved by members'
+           'Requests for payment of work. Requests must be created and approved by members'
        },
        {
            style:{background:'rgba(247, 138, 42, 1)'},
-         header: approversCount,
-         meta: 'Number of Members',
+         header: 'Number of Members',
+         meta: approversCount,
          description:
            'Number of people who have joined this entity'
        },
        {
            style:{background:'rgba(247, 138, 42, 1)'},
-         header: web3.utils.fromWei(balance, 'ether'),
-         meta: 'Entity Balance (ether)',
+         header: 'Entity Balance (ether)',
+         meta: web3.utils.fromWei(balance, 'ether'),
          description:
-           'The balance is how much money this entity has left to spend.'
+           'Amount of ether in entity account.'
        }
      ];
 
@@ -95,7 +103,7 @@ class EntityShow extends Component {
    renderToken() {
     const items = [
     {
-        style:{background:'#9933ff'},
+        style:{background:'#0F93FE'},
         header: this.props.symbol,
         description: (
           <Link route={`/entities/${this.props.entityAddress}/token/${this.props.tokenAddress}/show`}>
@@ -125,22 +133,25 @@ class EntityShow extends Component {
      {this.renderToken()}
      <h3 style={{color: 'black'}} >Add or Remove Members</h3>
      <MembershipForm entityAddress={this.props.entityAddress}/>
+    
       </Grid.Column>
     </Grid.Row>
     <Grid.Row>
-         <Grid.Column>
+         <Grid.Column width={10}>
            <Link route={`/entities/${this.props.entityAddress}/requests`}>
              <a>
                <Button primary>View Payment Requests</Button>
              </a>
            </Link>
     
+      
            
-           <Link route={`/entities/${this.props.entityAddress}/dashboard`}>
-             <a>
-               <Button primary>Manage Entity</Button>
-             </a>
-           </Link>
+         </Grid.Column>
+         <Grid.Column width={6}>
+         <h3 style={{color: 'black'}} >Check Token Balance</h3>
+     <TokenBalanceForm token={this.props.token}/>
+    
+      
            
          </Grid.Column>
        </Grid.Row>

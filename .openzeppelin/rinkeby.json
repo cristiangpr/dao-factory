@@ -1,11 +1,11 @@
 {
   "contracts": {
     "EntityFactory": {
-      "address": "0x4896d1bE08101b879088e4ce998Bae03eBCed1aC",
-      "constructorCode": "608060405234801561001057600080fd5b50614d79806100206000396000f3fe",
-      "bodyBytecodeHash": "7063c8cc83d9ad88f9a18e6ecd9c3bfe7bcecbd52901d463136af78f36a30c91",
-      "localBytecodeHash": "dd553958aa53b9143c1bf619667cbacee57b6d71cf1b1992c1c04fadc2cda1a3",
-      "deployedBytecodeHash": "dd553958aa53b9143c1bf619667cbacee57b6d71cf1b1992c1c04fadc2cda1a3",
+      "address": "0x3644f05114d4da8a0656814eBd30265fFe221E60",
+      "constructorCode": "608060405234801561001057600080fd5b50615014806100206000396000f3fe",
+      "bodyBytecodeHash": "91bba93408a83b370dcd52de2fa76ca58b321d5b7d853daabf8962112497b292",
+      "localBytecodeHash": "676e2bf9f862516cea1f32064499d9dafcb53814d906b96e1afb49e589116ae4",
+      "deployedBytecodeHash": "676e2bf9f862516cea1f32064499d9dafcb53814d906b96e1afb49e589116ae4",
       "types": {
         "t_address": {
           "id": "t_address",
@@ -43,10 +43,10 @@
   "proxies": {
     "cc.io/EntityFactory": [
       {
-        "address": "0x52c16D844B5ba5d386e081dAC81fcb81a796B537",
+        "address": "0xF50E5a8048605A86de333DAe1c7159B898Eb8278",
         "version": "1.0.0",
-        "implementation": "0x4896d1bE08101b879088e4ce998Bae03eBCed1aC",
-        "admin": "0xFA1fEA66001522b4DE510c9F1D2d8D9B291553b4",
+        "implementation": "0x3644f05114d4da8a0656814eBd30265fFe221E60",
+        "admin": "0x45bF204d8098364DAb16ce733c61D8Eb231A6744",
         "kind": "Upgradeable"
       }
     ]
@@ -54,6 +54,6 @@
   "manifestVersion": "2.2",
   "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0xFA1fEA66001522b4DE510c9F1D2d8D9B291553b4"
+    "address": "0x45bF204d8098364DAb16ce733c61D8Eb231A6744"
   }
 }

@@ -108,12 +108,24 @@ function approveRequest(uint index) public {
         token.mint(request.recipient, request.value * request.compFactor);
         request.complete = true;
     }
+      
        function contribute() public payable {
         
       
         uint256 value = msg.value * tokenRate;
          token.mint(msg.sender, value);
     }
+    
+   
+    function sellTokens(address payable member,  uint amount) public onlyMembers {
+       
+       token.transferFrom(member, address(this), amount);
+       member.transfer(amount / tokenRate);
+    
+      
+      
+    }
+
     function getSummary() public view returns (
        uint, uint, uint, address, string memory, string memory
       ) {
@@ -133,7 +145,13 @@ function approveRequest(uint index) public {
     }
         
 
-
+    modifier onlyMembers() {
+        require(
+            members[msg.sender],
+            "Only members can call this function."
+        );
+        _;
+    }
 
 
   
