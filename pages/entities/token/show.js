@@ -99,10 +99,16 @@ class TokenShow extends Component {
       {
 
         header: "Token Rate to ETH",
-        meta: rate,
+        meta: tokenRate,
      
         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
       },
+      {
+      header: "Token Value in ETH",
+      meta:1/ tokenRate,
+   
+      style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+    },
       {
         header: "My Balance",
         meta: convertedMyBalance,

@@ -16,7 +16,7 @@ class EntityNew extends Component {
     missionDescription: '',
     tokenName: '',
     tokenSymbol: '',
-    rate: ''
+    price: ''
   };
   onSubmit = async event => {
     event.preventDefault();
@@ -25,7 +25,8 @@ class EntityNew extends Component {
     try {
       var ethJsUtil = require('ethereumjs-util');
        const accounts = await web3.eth.getAccounts();
-       const contractFactoryAddress = '0x4d30d59A474aD55e4A8eDA9698e6e5a18fC0A8cf';
+       const contractFactoryAddress = '0x23f45908b4C9303dED3f76208016AD26C58218f6';
+      
        const futureAddress = ethJsUtil.bufferToHex(ethJsUtil.generateAddress(
         contractFactoryAddress,
         await web3.eth.getTransactionCount(contractFactoryAddress)));
@@ -33,7 +34,7 @@ class EntityNew extends Component {
         console.log(contractFactoryAddress);
       
        await factory.methods
-         .createEntity(this.state.entityName, this.state.missionDescription, this.state.tokenName, this.state.tokenSymbol, this.state.rate)
+         .createEntity(this.state.entityName, this.state.missionDescription, this.state.tokenName, this.state.tokenSymbol, 1 / this.state.price)
          .send({
            from: accounts[0]
          });
@@ -85,11 +86,11 @@ class EntityNew extends Component {
            />
           </Form.Field>
           <Form.Field>
-           <label>Token Rate. Enter amount of tokens equal to 1 ETH. Must be an integer</label>
+           <label>Token Value in ETH. Token value should be set to entity's basic hourly compensation. Maximum Token value is 1 ETH  </label>
            <Input
-             value={this.state.rate}
-             onChange={e => this.setState({rate: e.target.value}) }
-             label="Tokens per ETH"
+             value={this.state.price}
+             onChange={e => this.setState({price: e.target.value}) }
+             label="ETH"
              labelPosition="right"/>
           </Form.Field>
           
