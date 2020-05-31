@@ -1,8 +1,9 @@
 import React, { Component, Fragment }from 'react';
 import factory from '../ethereum/factory';
-import { Card, Button, Grid } from 'semantic-ui-react';
+import { Card, Button } from 'semantic-ui-react';
+import {  Col, Row, Container } from 'react-bootstrap';
 import Layout from '../components/Layout';
-import Footer from '../components/Footer';
+
 import { Link } from '../routes.js'
 
 class EntityIndex extends Component {
@@ -33,6 +34,7 @@ render(){
   return (
     <Fragment>
   <Layout>
+  <Container>
   <div>
 
   <h3>Open Entities</h3>
@@ -48,10 +50,10 @@ render(){
 </Link>
   {this.renderEntities()}
   </div>
+  </Container>
 </Layout>
-<Grid>
-<Footer/>
-</Grid>
+
+
 </Fragment>
 )
 }

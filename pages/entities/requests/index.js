@@ -5,6 +5,7 @@ import Layout from '../../../components/Layout';
 import Footer from '../../../components/Footer';
 import Entity from '../../../ethereum/entity';
 import RequestRow from '../../../components/RequestRow';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 class RequestIndex extends Component {
@@ -44,6 +45,7 @@ class RequestIndex extends Component {
     return (
       <Fragment>
       <Layout>
+        <Container>
         <h3>Requests</h3>
         <Link route={`/entities/${this.props.entityAddress}/requests/new`}>
           <a>
@@ -68,9 +70,10 @@ class RequestIndex extends Component {
           <Body>{this.renderRows()}</Body>
         </Table>
         <div>Found {this.props.requestCount} requests.</div>
+        </Container>
       </Layout>
       <Grid>
-      <Footer/>
+    
       </Grid>
       </Fragment>
     );

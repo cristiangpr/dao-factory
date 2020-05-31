@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
-import Footer from '../../components/Footer';
+import { Container, Row, Col } from 'react-bootstrap';
 import Entity from '../../ethereum/entity';
 import Token from '../../ethereum/token';
 import TokenBalanceForm from '../../components/TokenBalanceForm';
@@ -123,21 +123,22 @@ class EntityShow extends Component {
     return (
       <Fragment>
       <Layout>
+        <Container>
         <h3>Entity Show</h3>
-        <Grid>
-    <Grid.Row>
-      <Grid.Column width={10}> <h3 style={{color: 'black'}}>Entity</h3>{this.renderCards()}</Grid.Column>
+       
+    <Row>
+      <Col md={8}> <h3 style={{color: 'black'}}>Entity</h3>{this.renderCards()}</Col>
 
-      <Grid.Column width={6}>
+      <Col md={4}>
       <h3 style={{color: 'black'}} >Token</h3>
      {this.renderToken()}
      <h3 style={{color: 'black'}} >Add or Remove Members</h3>
      <MembershipForm entityAddress={this.props.entityAddress}/>
     
-      </Grid.Column>
-    </Grid.Row>
-    <Grid.Row>
-         <Grid.Column width={10}>
+      </Col>
+    </Row>
+    <Row>
+         <Col width={8}>
            <Link route={`/entities/${this.props.entityAddress}/requests`}>
              <a>
                <Button primary>View Payment Requests</Button>
@@ -146,22 +147,20 @@ class EntityShow extends Component {
     
       
            
-         </Grid.Column>
-         <Grid.Column width={6}>
+         </Col>
+         <Col md={4}>
          <h3 style={{color: 'black'}} >Check Token Balance</h3>
      <TokenBalanceForm token={this.props.token}/>
     
       
            
-         </Grid.Column>
-       </Grid.Row>
+         </Col>
+       </Row>
 
-       </Grid>
-
+       
+       </Container>
       </Layout>
-      <Grid>
-   <Footer/>
-      </Grid>
+   
       </Fragment>
     );
   }

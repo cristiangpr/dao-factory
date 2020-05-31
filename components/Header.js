@@ -1,40 +1,30 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from '../routes';
 
 export default () => {
   return (
 
-    <Menu className="ui top fixed responsive menu" style={{ background:'#0F93FE', height: '80px'}} >
-
-      <Link route="/">
-        <a className="item">COLLABORATIVECOMMONS.IO</a>
-      </Link>
-        <Menu.Menu position="right">
-      <Link route="/entities/new">
-        <a className="item">Create Entity</a>
-      </Link>
-      <Link route="/entityIndex">
-        <a className="item">View Entities</a>
-      </Link>
-      <Link route="/entityIndex">
-        <a className="item">Collaborate</a>
-      </Link>
-      <Link route="/">
-        <a className="item">Download</a>
-      </Link>
-      <Link route="/">
-        <a className="item">Services</a>
-      </Link>
-     </Menu.Menu>
-
-      <Menu.Menu position="right">
-        <Link route="/">
-          <a className="item">MY CC</a>
-        </Link>
-
-
-      </Menu.Menu>
-    </Menu>
-  );
-};
+    <Navbar collapseOnSelect expand="lg"  style={{ background:'#0F93FE', height: '80px'}} >
+    <Navbar.Brand href="/">COLLABORATIVECOMMONS.IO</Navbar.Brand>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+    <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="mr-auto"  style={{ background:'#0F93FE'}}>
+        <Nav.Link href="/entities/new">Create Entity</Nav.Link>
+        <Nav.Link href="/entityIndex">View Entities</Nav.Link>
+        <Nav.Link href="#pricing">Collaborate</Nav.Link>
+        <Nav.Link href="#pricing">Download</Nav.Link>
+        
+        <Nav.Link href="#pricing">Services</Nav.Link>
+  
+  
+  
+      </Nav>
+      <Nav>
+        <Nav.Link href="#deets">My CC.IO</Nav.Link>
+      
+      </Nav>
+    </Navbar.Collapse>
+  </Navbar>
+  )
+}

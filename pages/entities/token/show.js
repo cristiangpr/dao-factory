@@ -2,7 +2,7 @@
 import React, { Component, Fragment } from 'react';
 import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../../components/Layout';
-import Footer from '../../../components/Footer';
+import { Container, Row, Col } from 'react-bootstrap';
 import Token from '../../../ethereum/token';
 import Entity from '../../../ethereum/entity';
 import ContributeForm from '../../../components/ContributeForm';
@@ -125,12 +125,13 @@ class TokenShow extends Component {
     return (
       <Fragment>
       <Layout>
+        <Container>
         <h3>Token Show</h3>
-        <Grid style={{marginTop:'100px'}}>
-    <Grid.Row>
-      <Grid.Column width={6}>{this.renderCards()}</Grid.Column>
+    
+    <Row>
+      <Col md={4}>{this.renderCards()}</Col>
 
-      <Grid.Column width={10}>
+      <Col md={8}>
         <ContributeForm tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
         <SellTokensForm  tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
 
@@ -138,16 +139,16 @@ class TokenShow extends Component {
 
       
 
-      </Grid.Column>
+      </Col>
       
-    </Grid.Row>
+    </Row>
 
 
-       </Grid>
-
+       
+       </Container>
       </Layout>
       <Grid>
-   <Footer/>
+
       </Grid>
       </Fragment>
     );

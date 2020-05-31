@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
-
-import { Container } from 'semantic-ui-react';
+import Footer from './Footer';
+import { Container } from 'react-bootstrap';
 import Head from 'next/head';
 
 export default props => {
@@ -20,14 +20,14 @@ export default props => {
    </Head>
 
       <Header/>
-    <Container style={{paddingTop: '50px', paddingBottom:"50px"}}>
+    <Container fluid style={{paddingTop: '50px', paddingBottom:"50px"}}>
 
 
       {props.children}
 
 
     </Container>
-
+  <Footer/>
 
 </div>
   );

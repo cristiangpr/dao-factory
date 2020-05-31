@@ -6,6 +6,7 @@ import web3 from '../../../ethereum/web3';
 import { Link, Router } from '../../../routes';
 import Layout from '../../../components/Layout';
 import Footer from '../../../components/Footer';
+import { Container, Row, Col } from 'react-bootstrap';
 
 class RequestNew extends Component {
 state = {
@@ -48,6 +49,7 @@ render() {
   return (
     <Fragment>
     <Layout>
+      <Container>
       <Link route={`/entities/${this.props.entityAddress}/requests`}>
         <a>Back</a>
       </Link>
@@ -84,9 +86,10 @@ render() {
           Create!
         </Button>
       </Form>
+      </Container>
     </Layout>
     <Grid>
-    <Footer/>
+  
     </Grid>
     </Fragment>
 

@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Button, Input, Message, Grid } from 'semantic-ui-react';
+import { Container, Row, Col } from 'react-bootstrap';
 import Layout from '../../components/Layout';
-import Footer from '../../components/Footer';
+
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 import { Link, Router } from '../../routes.js'
@@ -51,7 +52,7 @@ class EntityNew extends Component {
      return (
        <Fragment>
       <Layout>
-
+      <Container>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%', paddingBottom:'160px', paddingTop:'100px'}}>
           <h1 style={{color:'black'}}>Create new entity</h1>
       
@@ -97,10 +98,9 @@ class EntityNew extends Component {
             <Message error header="Oops!" content={this.state.errorMessage} />
           <Button loading={this.state.loading} primary>Create!</Button>
         </Form>
+        </Container>
       </Layout>
-      <Grid>
-      <Footer/>
-      </Grid>
+     
       </Fragment>
    )
 }
