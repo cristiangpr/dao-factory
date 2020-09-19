@@ -37,7 +37,7 @@ class TokenBalanceForm extends Component {
   <Fragment>
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} success={!!this.state.balance}>
         <Form.Field>
-          <label>Check Token Balance</label>
+          <label style={{color:"white"}}>Check Token Balance</label>
           <Input
             value={this.state.address}
             onChange={event => this.setState({ address: event.target.value })}

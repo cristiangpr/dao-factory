@@ -53,10 +53,10 @@ render() {
       <Link route={`/entities/${this.props.entityAddress}/requests`}>
         <a>Back</a>
       </Link>
-      <h3>Create a Request</h3>
+      <h3 style={{color:"white"}} >Create a Request</h3>
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%', paddingBottom:'100px'}}>
         <Form.Field>
-          <label>Description of Work</label>
+          <label style={{color:"white"}}>Description of Work</label>
           <Input
             value={this.state.description}
             onChange={event =>
@@ -65,7 +65,7 @@ render() {
         </Form.Field>
 
         <Form.Field>
-          <label>Hours Worked</label>
+          <label style={{color:"white"}}>Hours Worked</label>
           <Input
             value={this.state.value}
             onChange={event => this.setState({ value: event.target.value })}
@@ -73,7 +73,7 @@ render() {
         </Form.Field>
 
         <Form.Field>
-          <label>Compensation Level</label>
+          <label style={{color:"white"}}>Compensation Level</label>
           <Input
             value={this.state.recipient}
             onChange={event =>

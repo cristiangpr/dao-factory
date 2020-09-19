@@ -66,7 +66,7 @@ class MembershipForm extends Component {
   <Fragment>
       <Form onSubmit={this.onSubmitAdd} error={!!this.state.errorMessage}>
         <Form.Field>
-          <label>Address to add</label>
+          <label style={{color:"white"}}>Address to add</label>
           <Input
             value={this.state.memberAdd}
             onChange={event => this.setState({ memberAdd: event.target.value })}
@@ -83,7 +83,7 @@ class MembershipForm extends Component {
 
 <Form onSubmit={this.onSubmitRemove} error={!!this.state.errorMessage2}>
 <Form.Field>
-  <label>Address to remove</label>
+  <label style={{color:"white"}}>Address to remove</label>
   <Input
     value={this.state.memberRemove}
     onChange={event => this.setState({ memberRemove: event.target.value })}

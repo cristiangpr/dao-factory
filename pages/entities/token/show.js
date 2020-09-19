@@ -66,54 +66,54 @@ class TokenShow extends Component {
         header: "Entity",
         meta: entityAddress,
         
-        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+        style: { overflowWrap: 'break-word',background:'gray' }
       },
        {
 
          header: "Token Name",
          meta: name,
          
-         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+         style: { overflowWrap: 'break-word',background:'gray' }
        },
        {
 
         header: "Token Address",
         meta: tokenAddress,
         
-        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+        style: { overflowWrap: 'break-word',background:'gray' }
       },
        {
 
          header: "Token Symbol",
          meta: symbol,
       
-         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+         style: { overflowWrap: 'break-word',background:'gray' }
        },
        {
 
         header: "Total Supply",
         meta: convertedSupply,
      
-        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+        style: { overflowWrap: 'break-word',background:'gray' }
       },
       {
 
         header: "Token Rate to ETH",
         meta: tokenRate,
      
-        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+        style: { overflowWrap: 'break-word',background:'gray' }
       },
       {
       header: "Token Value in ETH",
       meta:1/ tokenRate,
    
-      style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+      style: { overflowWrap: 'break-word',background:'gray' }
     },
       {
         header: "My Balance",
         meta: convertedMyBalance,
      
-        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+        style: { overflowWrap: 'break-word',background:'gray' }
       },
  
      ];
@@ -125,7 +125,7 @@ class TokenShow extends Component {
     return (
       <Fragment>
       <Layout>
-        <Container>
+        <Container style={{paddingTop:"5vh", paddingBottom:"5vh"}}>
         <h3>Token Show</h3>
     
     <Row>

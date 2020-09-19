@@ -17,11 +17,12 @@ class EntityIndex extends Component {
   renderEntities() {
     const items = this.props.entities.map(entityAddress => {
       return {
-        style:{background:'rgba(247, 138, 42, 1)'},
-        header: entityAddress,
+        style:{background:'gray'},
+        header: "Address",
+        meta: entityAddress,
         description: (
           <Link route={`/entities/${entityAddress}/show`}>
-          <a>View Entity</a>
+          <a>View DAO</a>
           </Link>
         ),
         fluid: true
@@ -34,14 +35,14 @@ render(){
   return (
     <Fragment>
   <Layout>
-  <Container>
+  <Container style={{paddingTop:"10vh"}}>
   <div>
 
-  <h3>Open Entities</h3>
+  <h3>Open DAOs</h3>
 <Link route='/entities/new'>
 <a>
   <Button
-  content="Create Entity"
+  content="Create DAO"
   icon="add circle"
   primary
   floated="right"

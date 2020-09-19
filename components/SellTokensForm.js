@@ -76,9 +76,9 @@ class SellTokensForm extends Component {
     <Fragment>
     
 
-      <Form  error={!!this.state.errorMessage}>
+      <Form error={!!this.state.errorMessage}>
         <Form.Field>
-          <label>Exchange Tokens for Ether</label>
+          <label style={{color:"white"}}>Exchange Tokens for Ether</label>
           <Input
             value={this.state.amount}
             onChange={event => this.setState({ amount: event.target.value })}

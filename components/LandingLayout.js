@@ -1,12 +1,13 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { Container } from 'react-bootstrap';
+import { Container, Jumbotron, Button } from 'react-bootstrap';
 import Head from 'next/head';
+import { Link } from '../routes';
 
 const Layout = props => {
   return (
-    <div className='app'>
+    <div className='app' style={{backgroundColor:'#20232a'}}>
     <Head>
     <link
  rel="stylesheet"
@@ -20,7 +21,21 @@ const Layout = props => {
    </Head>
 
       <Header/>
-    <Container fluid style={{ minHeight: "calc(100vh - 100px)" , backgroundColor:'#20232a'}}>
+      <Jumbotron fluid style={{backgroundImage:"url(../static/blockchain.jpg)"}}>
+  <Container>
+    <h1>Welcome to</h1>
+    <h1>The DAO Factory</h1>
+    <p>
+      Create a payment request and fulfillment DAO
+    </p>
+    <p>
+    <Link to="/entities/new">
+    <Button variant="primary">Create DAO</Button>
+    </Link>
+  </p>
+  </Container>
+</Jumbotron>
+    <Container fluid style={{ minHeight: "calc(100vh - 425px)" , backgroundColor:'#20232a'}}>
 
 
       {props.children}

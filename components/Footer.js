@@ -2,31 +2,25 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from '../routes';
 
-export default () => {
+const Footer = () => {
   return (
-   <Container fluid>
-    <Row className='footer' style={{ marginTop: '10px', background:'#0F93FE', height: '200px', textAlign:'center'}} >
-      
-      <Col md={4}>
-        <h1 className="item" id='footer'>OUR ORG </h1>
-        <h3>Open Space Network Foundation <br/>503c</h3>
-
-
-
+   
+    <Row className='footer mt-auto py-3 bg-dark text-white' style={{  textAlign:'center'}} >
+      <Col md style={{paddingTop:"3vh"}}>
+         Contact
       </Col>
-
-      <Col md={4}>
-        <h1 className="item" id='footer'>Head Office </h1>
-         <h3>San Francisco, CA 94158</h3>
+      <Col md style={{paddingTop:"3vh"}} >
+        Terms of Use
         </Col>
-      <Col md={4}>
-        <h1 className="item" id='footer'>Case Studies </h1>
-        <h3>Learn with case studies</h3>
-      </Col>
+        <Col md style={{paddingTop:"3vh"}}>
+        Leave a Tip
+        </Col>
+      
 
      
 
     </Row>
-    </Container>
+ 
   );
 };
+export default Footer;

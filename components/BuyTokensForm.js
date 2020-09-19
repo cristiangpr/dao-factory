@@ -49,7 +49,7 @@ class BuyTokensForm extends Component {
 
       <Form onSubmit={this.onSubmitPurchase} error={!!this.state.errorMessage}>
         <Form.Field>
-          <label>Purchase Tokens</label>
+          <label style={{color:"white"}}>Purchase Tokens</label>
           <Input
             value={this.state.purchase}
             onChange={event => this.setState({ purchase: event.target.value })}

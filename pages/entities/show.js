@@ -52,18 +52,18 @@ class EntityShow extends Component {
        {
 
          header: name,
-         meta: 'Entity Mission:',
+         meta: 'DAO Mission:',
          description:
           mission,
-         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+         style: { overflowWrap: 'break-word',background:'gray' }
        },
        {
 
-        header:  'Entity address:',
+        header:  'DAO address:',
         meta: entityAddress,
      
         
-        style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+        style: { overflowWrap: 'break-word',background:'gray' }
       },
        {
 
@@ -71,29 +71,29 @@ class EntityShow extends Component {
          meta: manager,
          description:
            'The manager created this entity',
-         style: { overflowWrap: 'break-word',background:'rgba(247, 138, 42, 1)' }
+         style: { overflowWrap: 'break-word',background:'gray' }
        },
 
        {
-           style:{background:'rgba(247, 138, 42, 1)'},
+           style:{background:'gray'},
          header: 'Number of Payment Requests',
          meta: requestsCount,
          description:
            'Requests for payment of work. Requests must be created and approved by members'
        },
        {
-           style:{background:'rgba(247, 138, 42, 1)'},
+           style:{background:'gray'},
          header: 'Number of Members',
          meta: approversCount,
          description:
-           'Number of people who have joined this entity'
+           'Number of people who have joined this DAO'
        },
        {
-           style:{background:'rgba(247, 138, 42, 1)'},
-         header: 'Entity Balance (ether)',
+           style:{background:'gray'},
+         header: 'DAO Balance (ether)',
          meta: web3.utils.fromWei(balance, 'ether'),
          description:
-           'Amount of ether in entity account.'
+           'Amount of ether in DAO account.'
        }
      ];
 
@@ -123,22 +123,22 @@ class EntityShow extends Component {
     return (
       <Fragment>
       <Layout>
-        <Container>
-        <h3>Entity Show</h3>
+        <Container style={{paddingTop:"10vh"}}>
+   
        
     <Row>
-      <Col md={8}> <h3 style={{color: 'black'}}>Entity</h3>{this.renderCards()}</Col>
+      <Col md={8}> <h3>DAO Dashboard</h3>{this.renderCards()}</Col>
 
       <Col md={4}>
-      <h3 style={{color: 'black'}} >Token</h3>
+      <h3>Token</h3>
      {this.renderToken()}
-     <h3 style={{color: 'black'}} >Add or Remove Members</h3>
+     <h3>Add or Remove Members</h3>
      <MembershipForm entityAddress={this.props.entityAddress}/>
     
       </Col>
     </Row>
     <Row>
-         <Col width={8}>
+         <Col width={8} style={{paddingTop:"1vh"}}>
            <Link route={`/entities/${this.props.entityAddress}/requests`}>
              <a>
                <Button primary>View Payment Requests</Button>
@@ -148,8 +148,8 @@ class EntityShow extends Component {
       
            
          </Col>
-         <Col md={4}>
-         <h3 style={{color: 'black'}} >Check Token Balance</h3>
+         <Col md={4}  style={{paddingBottom:"1vh"}}>
+         <h3 >Check Token Balance</h3>
      <TokenBalanceForm token={this.props.token}/>
     
       
