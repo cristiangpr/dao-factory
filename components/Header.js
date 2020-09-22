@@ -12,7 +12,7 @@ const Header = () => {
       <Nav className="mr-auto"  style={{ background:'#0F93FE', paddingLeft: "5%"}}>
         <Nav.Link href="/entities/new">Create DAO</Nav.Link>
         <Nav.Link href="/entityIndex">View DAOs</Nav.Link>
-        <Nav.Link href="#pricing">About</Nav.Link>
+        <Nav.Link href="/about">About</Nav.Link>
       
   
   

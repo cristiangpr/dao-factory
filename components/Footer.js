@@ -7,13 +7,19 @@ const Footer = () => {
    
     <Row className='footer mt-auto py-3 bg-dark text-white' style={{  textAlign:'center'}} >
       <Col md style={{paddingTop:"3vh"}}>
-         Contact
+        <Link to="/about">
+         About
+         </Link>
       </Col>
       <Col md style={{paddingTop:"3vh"}} >
-        Terms of Use
+      <Link to="/contact">
+         Contact
+         </Link>
         </Col>
         <Col md style={{paddingTop:"3vh"}}>
-        Leave a Tip
+        <Link to="/terms">
+        Terms of Use
+         </Link>
         </Col>
       
 
