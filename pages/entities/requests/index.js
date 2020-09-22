@@ -46,7 +46,7 @@ class RequestIndex extends Component {
       <Fragment>
       <Layout>
         <Container>
-        <h3>Requests</h3>
+        <h3 style={{ paddingTop:"10px"}}>Requests</h3>
         <Link route={`/entities/${this.props.entityAddress}/requests/new`}>
           <a>
             <Button primary floated="right" style={{ marginBottom: 10 }}>

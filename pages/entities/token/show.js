@@ -118,7 +118,7 @@ class TokenShow extends Component {
  
      ];
 
-     return <Card.Group items={items} />;
+     return<Col> <Card.Group items={items} /> </Col>;
    }
 
   render() {
@@ -126,12 +126,12 @@ class TokenShow extends Component {
       <Fragment>
       <Layout>
         <Container style={{paddingTop:"5vh", paddingBottom:"5vh"}}>
-        <h3>Token Show</h3>
+        <h3>Token Info</h3>
     
     <Row>
-      <Col md={4}>{this.renderCards()}</Col>
+      {this.renderCards()}
 
-      <Col md={8}>
+      <Col md={4}>
         <ContributeForm tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
         <SellTokensForm  tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
 

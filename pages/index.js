@@ -20,7 +20,7 @@ render(){
 
 <Container>
 <Row  style={{paddingTop:"5vh"}}>
-  <Col md style={{justifyContent:"center", display:"flex"}}>
+  <Col md style={{justifyContent:"center", display:"flex" , paddingBottom:"10px"}}>
   <Link to="/entities/new">
   <Card style={{ background:"gray",  height:"10rem" }}
  
@@ -30,7 +30,7 @@ render(){
                      />
 </Link>
   </Col>
-  <Col md style={{justifyContent:"center", display:"flex"}} >
+  <Col md style={{justifyContent:"center", display:"flex", paddingBottom:"10px"}} >
   <Card style={{  background:"gray",  height:"10rem"  }}
   
   header= 'View DAOs'
@@ -39,7 +39,7 @@ render(){
                      />
 
   </Col>
-  <Col md style={{justifyContent:"center", display:"flex"}} >
+  <Col md style={{justifyContent:"center", display:"flex", paddingBottom:"10px"}} >
   <Card style={{ background:"gray", height:"10rem"}}
   
  

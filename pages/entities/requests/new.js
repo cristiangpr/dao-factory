@@ -50,11 +50,9 @@ render() {
     <Fragment>
     <Layout>
       <Container>
-      <Link route={`/entities/${this.props.entityAddress}/requests`}>
-        <a>Back</a>
-      </Link>
-      <h3 style={{color:"white"}} >Create a Request</h3>
-      <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%', paddingBottom:'100px'}}>
+    
+      <h3 style={{color:"white", paddingTop:"100px"}} >Create a Request</h3>
+      <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{width:'50%'}}>
         <Form.Field>
           <label style={{color:"white"}}>Description of Work</label>
           <Input

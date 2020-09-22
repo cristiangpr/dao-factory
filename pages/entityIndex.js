@@ -25,10 +25,13 @@ class EntityIndex extends Component {
           <a>View DAO</a>
           </Link>
         ),
-        fluid: true
+        
       }
     });
-    return <Card.Group items={items} style={{paddingBottom:'250px'}} />
+    return <Col >
+         
+     <Card.Group items={items}  /> 
+     </Col>
   }
 
 render(){
@@ -49,7 +52,9 @@ render(){
   />
   </a>
 </Link>
+<Row>
   {this.renderEntities()}
+  </Row>
   </div>
   </Container>
 </Layout>

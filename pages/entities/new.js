@@ -53,7 +53,7 @@ class EntityNew extends Component {
        <Fragment>
       <Layout>
       <Container  >
-      <h1 style={{color:'white'}}>Create new DAO</h1>
+      <h1 style={{color:'white', paddingTop:"10px"}}>Create new DAO</h1>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage} style={{ width:'50%',  backgroundColor:"#20232a"}}>
           
       
