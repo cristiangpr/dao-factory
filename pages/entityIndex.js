@@ -28,39 +28,36 @@ class EntityIndex extends Component {
         
       }
     });
-    return <Col >
-         
-     <Card.Group items={items}  /> 
-     </Col>
+        return <Col >
+                 <Card.Group items={items}  /> 
+               </Col>
   }
 
 render(){
   return (
     <Fragment>
-  <Layout>
-  <Container style={{paddingTop:"10vh"}}>
-  <div>
+      <Layout>
+        <Container style={{paddingTop:"10vh"}}>
+         <div>
 
-  <h3>Open DAOs</h3>
-<Link route='/entities/new'>
-<a>
-  <Button
-  content="Create DAO"
-  icon="add circle"
-  primary
-  floated="right"
-  />
-  </a>
-</Link>
-<Row>
-  {this.renderEntities()}
-  </Row>
-  </div>
-  </Container>
-</Layout>
-
-
-</Fragment>
+           <h3>Open DAOs</h3>
+            <Link route='/entities/new'>
+             <a>
+              <Button
+                content="Create DAO"
+                icon="add circle"
+                primary
+                floated="right"
+               />
+             </a>
+           </Link>
+           <Row>
+            {this.renderEntities()}
+           </Row>
+          </div>
+       </Container>
+     </Layout>
+   </Fragment>
 )
 }
 }

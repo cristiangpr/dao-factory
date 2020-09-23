@@ -37,11 +37,11 @@ class SellTokensForm extends Component {
         
       
     } catch (err) {
-      this.setState({ errorMessage: err.message });
+         this.setState({ errorMessage: err.message });
     }
 
-    this.setState({ loading: false, errorMessage: '' });
-    Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
+          this.setState({ loading: false, errorMessage: '' });
+         Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
   };
   
   

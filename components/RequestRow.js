@@ -7,18 +7,18 @@ import { Router } from '../routes';
 
 
 class RequestRow extends Component {
-onApprove = async () => {
-  try { const entity = Entity(this.props.entityAddress);
+   onApprove = async () => {
+     try { const entity = Entity(this.props.entityAddress);
 
-  const accounts = await web3.eth.getAccounts();
-  await entity.methods.approveRequest(this.props.id).send({
-    from: accounts[0]
+      const accounts = await web3.eth.getAccounts();
+      await entity.methods.approveRequest(this.props.id).send({
+       from: accounts[0]
   });
-  Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
-}catch (err) {
-  this.setState({ errorMessage: err.message });
+      Router. pushRoute(`/entities/${this.props.entityAddress}/show`);
+     }catch (err) {
+        this.setState({ errorMessage: err.message });
 }
-Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
+        Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
 };
 
 onFinalize = async () => {

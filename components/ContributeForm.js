@@ -30,7 +30,7 @@ class ContributeForm extends Component {
       this.setState({ errorMessage: err.message });
     }
 
-    this.setState({ loading: false, value: '' });
+      this.setState({ loading: false, value: '' });
   };
 
   render() {

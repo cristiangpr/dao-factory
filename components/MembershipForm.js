@@ -14,12 +14,10 @@ class MembershipForm extends Component {
     loading2: false
   };
 
-  onSubmitAdd = async event => {
-    event.preventDefault();
-
-    const entity = Entity(this.props.entityAddress);
-
-    this.setState({ loading: true, errorMessage: '' });
+      onSubmitAdd = async event => {
+        event.preventDefault();
+        const entity = Entity(this.props.entityAddress);
+         this.setState({ loading: true, errorMessage: '' });
 
     try {
       const accounts = await web3.eth.getAccounts();
@@ -33,8 +31,8 @@ class MembershipForm extends Component {
       this.setState({ errorMessage: err.message });
     }
 
-    this.setState({ loading: false, value: '' });
-    Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
+      this.setState({ loading: false, value: '' });
+     Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
   };
 
   onSubmitRemove = async event => {
@@ -56,8 +54,8 @@ class MembershipForm extends Component {
       this.setState({ errorMessage2: err.message });
     }
 
-    this.setState({ loading2: false, value: '' });
-    Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
+      this.setState({ loading2: false, value: '' });
+      Router.pushRoute(`/entities/${this.props.entityAddress}/show`);
   };
 
 
@@ -81,23 +79,23 @@ class MembershipForm extends Component {
         </Button>
       </Form>
 
-<Form onSubmit={this.onSubmitRemove} error={!!this.state.errorMessage2}>
-<Form.Field>
-  <label style={{color:"white"}}>Address to remove</label>
-  <Input
-    value={this.state.memberRemove}
-    onChange={event => this.setState({ memberRemove: event.target.value })}
-    label="address"
-    labelPosition="right"
-  />
-</Form.Field>
+    <Form onSubmit={this.onSubmitRemove} error={!!this.state.errorMessage2}>
+      <Form.Field>
+       <label style={{color:"white"}}>Address to remove</label>
+        <Input
+           value={this.state.memberRemove}
+           onChange={event => this.setState({ memberRemove: event.target.value })}
+           label="address"
+           labelPosition="right"
+          />
+      </Form.Field>
 
-<Message error header="Oops!" content={this.state.errorMessage2} />
-<Button primary loading={this.state.loading2}>
-  Remove Member!
-</Button>
-</Form>
-</Fragment>
+       <Message error header="Oops!" content={this.state.errorMessage2} />
+       <Button primary loading={this.state.loading2}>
+         Remove Member!
+       </Button>
+     </Form>
+   </Fragment>
     );
   }
 }

@@ -122,46 +122,34 @@ class EntityShow extends Component {
   render() {
     return (
       <Fragment>
-      <Layout>
+       <Layout>
         <Container style={{paddingTop:"10vh"}}>
-   
-       
-    <Row>
-      <Col md={8}> <h3>DAO Dashboard</h3>{this.renderCards()}</Col>
+          <Row>
+             <Col md={8}> <h3>DAO Dashboard</h3>{this.renderCards()}</Col>
 
-      <Col md={4}>
-      <h3>Token</h3>
-     {this.renderToken()}
-     <h3>Add or Remove Members</h3>
-     <MembershipForm entityAddress={this.props.entityAddress}/>
-    
-      </Col>
-    </Row>
-    <Row>
-         <Col width={8} style={{paddingTop:"1vh"}}>
-           <Link route={`/entities/${this.props.entityAddress}/requests`}>
-             <a>
-               <Button primary>View Payment Requests</Button>
-             </a>
-           </Link>
-    
-      
-           
-         </Col>
-         <Col md={4}  style={{paddingBottom:"1vh"}}>
-         <h3 >Check Token Balance</h3>
-     <TokenBalanceForm token={this.props.token}/>
-    
-      
-           
-         </Col>
-       </Row>
-
-       
+             <Col md={4}>
+             <h3>Token</h3>
+                {this.renderToken()}
+             <h3>Add or Remove Members</h3>
+                <MembershipForm entityAddress={this.props.entityAddress}/>
+              </Col>
+          </Row>
+          <Row>
+            <Col width={8} style={{paddingTop:"1vh"}}>
+              <Link route={`/entities/${this.props.entityAddress}/requests`}>
+                <a>
+                   <Button primary>View Payment Requests</Button>
+               </a>
+              </Link>
+           </Col>
+           <Col md={4}  style={{paddingBottom:"1vh"}}>
+             <h3 >Check Token Balance</h3>
+               <TokenBalanceForm token={this.props.token}/>
+           </Col>
+         </Row>
        </Container>
       </Layout>
-   
-      </Fragment>
+   </Fragment>
     );
   }
 }

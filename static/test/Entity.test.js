@@ -7,7 +7,7 @@ const provider = ganache.provider();
 const web3 = new Web3(provider);
 const events = require('events').EventEmitter.defaultMaxListeners = 0;
 
-const compiledFactory = require('../ethereum/build/CampFactory.json');
+const compiledFactory = require('../ethereum/build/EntityFactory.json');
 const compiledEntity = require('../ethereum/build/Entity.json');
 
 let accounts;
@@ -46,18 +46,7 @@ describe('Entities', () => {
     const isContributor = await entity.methods.approvers(accounts[1]).call();
     assert(isContributor);
   });
-  it('requires a minimum contribution', async () => {
-      try {
-        await entity.methods.contribute().send({
-          from: accounts[1],
-          value: '99'  // less than minimum
-        });
-      } catch(error) {
-        assert(true); // if it fails, the test passes
-        return;   // exit the test
-      }
-      assert(false); // code didn't fail, so test fail
-    });
+
 
     it('allows manager to make a request', async () => {
       await entity.methods.createRequest('buy shit', '100', accounts[1]).send({

@@ -128,29 +128,21 @@ class TokenShow extends Component {
         <Container style={{paddingTop:"5vh", paddingBottom:"5vh"}}>
         <h3>Token Info</h3>
     
-    <Row>
-      {this.renderCards()}
+           <Row>
+              {this.renderCards()}
 
-      <Col md={4}>
-        <ContributeForm tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
-        <SellTokensForm  tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
-
-      
-
-      
-
-      </Col>
-      
-    </Row>
+             <Col md={4}>
+               <ContributeForm tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
+               <SellTokensForm  tokenAddress={this.props.tokenAddress} entityAddress={this.props.entityAddress}/>
+             </Col>
+          </Row>
 
 
        
-       </Container>
-      </Layout>
-      <Grid>
-
-      </Grid>
-      </Fragment>
+          </Container>
+        </Layout>
+      
+       </Fragment>
     );
   }
 }
