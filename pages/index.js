@@ -38,7 +38,7 @@ render(){
                 <Card style={{ background:"gray", height:"10rem"}}
                        header= 'About'
                        description="Learn about the DAO factory"
-                       href="/entities/new"
+                       href="/about"
                      />
                </Col>
             </Row>
