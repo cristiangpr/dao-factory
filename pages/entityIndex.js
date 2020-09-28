@@ -4,6 +4,7 @@ import { Card, Button } from 'semantic-ui-react';
 import {  Col, Row, Container } from 'react-bootstrap';
 import Layout from '../components/Layout';
 
+
 import { Link } from '../routes.js'
 
 class EntityIndex extends Component {

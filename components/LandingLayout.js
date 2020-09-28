@@ -28,6 +28,9 @@ const Layout = props => {
              <p>
               Create a payment request and fulfillment DAO
             </p>
+            <p>
+              Please make sure your wallet is connected to Rinkeby testnet
+            </p>
              <p>
               <Link to="/entities/new">
                 <Button variant="primary">Create DAO</Button>

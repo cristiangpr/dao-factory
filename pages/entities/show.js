@@ -8,6 +8,9 @@ import TokenBalanceForm from '../../components/TokenBalanceForm';
 import MembershipForm from '../../components/MembershipForm';
 import web3 from '../../ethereum/web3';
 
+
+
+
 import { Link } from '../../routes';
 
 class EntityShow extends Component {
@@ -22,7 +25,7 @@ class EntityShow extends Component {
      console.log(summary);
      return {
        entityAddress: props.query.entityAddress,
-      tokenAddress: tokenAddress,
+       tokenAddress: tokenAddress,
        token : token,
        symbol: symbol,
      
